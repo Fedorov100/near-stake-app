@@ -169,7 +169,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                         </li> */}
                         {data.map(({ label, tooltip, amount, color }, i) => (
                             <li
-                                key={label}
+                                key={i}
                                 style={{ color: color[0] }}
                                 data-focus={i === focusedIndex}
                             >

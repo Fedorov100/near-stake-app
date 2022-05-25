@@ -2,6 +2,7 @@ import { RouteMenu, useMenus } from "config/menu";
 import { screen } from "env";
 import { Link, useMatch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ButtonList } from "./components/ConnectButton";
 import { Container } from "./style";
 
 export interface DesktopHeaderProps {
@@ -21,7 +22,13 @@ export default function Header({ className }: DesktopHeaderProps) {
 
                 <div />
 
-                <section className="wallet"></section>
+                <section className="wallet">
+                    <ButtonList
+                        className="connect"
+                        title="Connect Wallet"
+                    >
+                    </ButtonList>
+                </section>
 
                 <GlobalStyle />
             </div>

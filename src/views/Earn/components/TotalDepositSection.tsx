@@ -117,9 +117,6 @@ export function UpdateBalanceButton({
     className,
     coin,
     proceed1,
-    deposit,
-    txFee,
-    invalidNextTxFee,
 }: any) {
     // ---------------------------------------------
     // dependencies
@@ -149,12 +146,7 @@ export function UpdateBalanceButton({
             <ActionButton
                 className="sizeButton"
                 onClick={() => {
-                    if (coin === 'uluna') {
-                        proceed1(deposit, '11500', invalidNextTxFee);
-                    }
-                    if (coin === 'uusd') {
-                        proceed1(deposit, '150000', invalidNextTxFee);
-                    }
+                    proceed1();
                 }}
                 style={updateStyles}
             >
