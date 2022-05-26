@@ -1,18 +1,19 @@
 import { AccountBalanceWallet } from "@mui/icons-material";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface ButtonListProps {
     className?: string;
     title?: string;
     footer?: ReactNode;
-    children: ReactNode;
+    children?: ReactNode;
+    onClick: () => void;
 }
 
 function ButtonListBase(props: ButtonListProps) {
     const { className, title, footer, children } = props;
     return (
-        <section className={className}>
+        <section className={className} onClick={props.onClick}>
             <AccountBalanceWallet className="wallet-icon" />
             {title && <h1>{title}</h1>}
             <div className="children">{children}</div>
@@ -26,7 +27,7 @@ export const ButtonList = styled(ButtonListBase)`
     border-radius: 25px;
     border: 1px solid #f9d85e;
     padding: 3px 35px;
-	cursor: pointer;
+    cursor: pointer;
 
     .wallet-icon {
         color: #f9d85e;

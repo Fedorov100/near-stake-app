@@ -1,8 +1,10 @@
 import { RouteMenu, useMenus } from "config/menu";
 import { screen } from "env";
+import { useEffect, useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { ButtonList } from "./components/ConnectButton";
+import ConnectWalletDialog from "./components/ConnectWalletDialog";
 import { Container } from "./style";
 
 export interface DesktopHeaderProps {
@@ -11,6 +13,13 @@ export interface DesktopHeaderProps {
 
 export default function Header({ className }: DesktopHeaderProps) {
     const menus = useMenus();
+    const [openWalletDialog, setOpenWalletDialog] = useState<boolean>(false);
+    const [waitingConnect, setWaitingConnect] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!openWalletDialog) setWaitingConnect(false);
+    }, [openWalletDialog]);
+
     return (
         <Container>
             <div className={"menu-wrap"}>
@@ -20,17 +29,22 @@ export default function Header({ className }: DesktopHeaderProps) {
                     ))}
                 </nav>
 
-                <div />
-
                 <section className="wallet">
                     <ButtonList
                         className="connect"
                         title="Connect Wallet"
-                    >
-                    </ButtonList>
+                        onClick={() => setOpenWalletDialog(!openWalletDialog)}
+                    ></ButtonList>
                 </section>
 
                 <GlobalStyle />
+                <ConnectWalletDialog
+                    open={openWalletDialog}
+                    closeDialog={() => setOpenWalletDialog(false)}
+                    isWaiting={waitingConnect}
+                    isFailed={false}
+                    setWaiting={setWaitingConnect}
+                />
             </div>
         </Container>
     );
