@@ -1,22 +1,25 @@
 import { AccountBalanceWallet } from "@mui/icons-material";
-import { ReactNode } from "react";
 import styled from "styled-components";
+import { Account } from "..";
+import ConnectedButton from "./ConnectedButton";
 
-interface ButtonListProps {
+interface ButtonListProps extends Account {
     className?: string;
     title?: string;
-    footer?: ReactNode;
-    children?: ReactNode;
     onClick: () => void;
 }
 
 function ButtonListBase(props: ButtonListProps) {
-    const { className, title, footer, children } = props;
+    const { className, title, connected } = props;
+
+    if (connected) {
+        return <ConnectedButton {...props} />;
+    }
+
     return (
         <section className={className} onClick={props.onClick}>
             <AccountBalanceWallet className="wallet-icon" />
             {title && <h1>{title}</h1>}
-            <div className="children">{children}</div>
         </section>
     );
 }

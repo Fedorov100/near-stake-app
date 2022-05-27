@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { Near, Sender } from "@libs/icons";
 import ConnectWatiting from "./ConnectWatiting";
 import ConnectFailed from "./ConnectFailed";
+import { useWallet } from "contexts/accounts";
+import { WalletConnection } from "near-api-js";
 
 interface ConnectWalletDialogProps extends UIElementProps {
     closeDialog: (returnValue: void) => void;
@@ -17,16 +19,19 @@ interface ConnectWalletDialogProps extends UIElementProps {
 export default function ConnectWalletDialogBase(
     props: ConnectWalletDialogProps
 ) {
+    const wallet: WalletConnection = useWallet();
+
+    const connectNearWallet = async () => {
+        props.setWaiting(true);
+        wallet.requestSignIn();
+    };
+
     if (props.isFailed) {
-        return (
-            <ConnectFailed {...props} />
-        );
+        return <ConnectFailed {...props} />;
     }
 
     if (props.isWaiting) {
-        return (
-            <ConnectWatiting {...props} />
-        );
+        return <ConnectWatiting {...props} />;
     }
 
     return (
@@ -48,7 +53,7 @@ export default function ConnectWalletDialogBase(
                         <Grid item xs={6}>
                             <Box
                                 className="wallet-item"
-                                onClick={() => props.setWaiting(true)}
+                                onClick={() => connectNearWallet()}
                             >
                                 <Near viewBox="0 0 49 49" />
                                 <WalletName>Near Wallet</WalletName>
