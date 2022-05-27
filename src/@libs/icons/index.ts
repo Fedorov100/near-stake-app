@@ -19,6 +19,8 @@ import { ReactComponent as WalletIcon } from './assets/Wallet.svg';
 import { ReactComponent as WalletconnectIcon } from './assets/Walletconnect.svg';
 import { ReactComponent as ParticipateInLiquidationsIcon } from './assets/ParticipateInLiquidations.svg';
 import { ReactComponent as SettingsIcon } from './assets/Settings.svg';
+import { ReactComponent as NearIcon } from './assets/Near.svg';
+import { ReactComponent as SenderIcon } from './assets/Sender.svg';
 import { createMaterialIcon } from './createMaterialIcon';
 
 export const Discord = createMaterialIcon(DiscordIcon);
@@ -44,3 +46,5 @@ export const ParticipateInLiquidations = createMaterialIcon(
   ParticipateInLiquidationsIcon,
 );
 export const Settings = createMaterialIcon(SettingsIcon);
+export const Near = createMaterialIcon(NearIcon);
+export const Sender = createMaterialIcon(SenderIcon);
