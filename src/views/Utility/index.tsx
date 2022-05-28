@@ -81,7 +81,7 @@ export default function Utility({ className }: BorrowProps) {
                             </div>
                             <StakeButton
                                 coin={"uluna"}
-                                coinName={"NOW & GET FREE TerraT"}
+                                coinName={"NOW & GET FREE NEAR"}
                             />
                         </section>
                         <section

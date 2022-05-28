@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Container } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
@@ -11,18 +11,20 @@ export function numberWithCommas(num: number) {
 }
 
 export const NewChartEntire = (props: any) => {
-    let tooltipRef = React.useRef<any>();
+    const tooltipRef = useRef<any>();
     const getGradient = () => {
         const canvas = document.createElement("canvas");
         const myChartRef: any = canvas.getContext("2d");
 
-        let gradientLine = myChartRef.createLinearGradient(0, 0, 0, 400);
+        const gradientLine = myChartRef.createLinearGradient(0, 0, 0, 400);
         gradientLine.addColorStop(0, "rgba(10, 147, 150, 0.21)");
         //gradientLine.addColorStop(0.5, "rgba(25,185,128,0.3)");
         gradientLine.addColorStop(0.8, "rgba(255, 255, 255, 0)");
         return gradientLine;
     };
-    const [entireTVL, setEntireTVL] = React.useState({
+
+    const [tvlAmmt, setTVLAmmt] = useState<number>(0.0);
+    const [entireTVL, setEntireTVL] = useState({
         data: [
             { x: "2021-08-08T13:12:23", y: 3 },
             { x: "2021-08-08T13:12:45", y: 5 },
@@ -34,10 +36,10 @@ export const NewChartEntire = (props: any) => {
     });
     const MINUTE_MS = 15000;
 
-    React.useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             axios
-                .get("https://api.llama.fi/charts/terra")
+                .get("https://api.llama.fi/charts/near")
                 .then(function (response) {
                     // handle success
                     setEntireTVL(response);
@@ -47,14 +49,13 @@ export const NewChartEntire = (props: any) => {
         return () => clearInterval(interval);
     }, []);
 
-    React.useEffect(() => {
-        axios
-            .get("https://api.llama.fi/charts/terra")
-            .then(function (response) {
-                // handle success
-                setEntireTVL(response);
-            });
+    useEffect(() => {
+        axios.get("https://api.llama.fi/charts/near").then(function (response) {
+            // handle success
+            setEntireTVL(response);
+        });
     }, []);
+
     const getData = (histories: any) => {
         let finalArray: any = [];
 
@@ -64,19 +65,23 @@ export const NewChartEntire = (props: any) => {
                 y: item.totalLiquidityUSD,
             });
         });
-        if (finalArray.length > 200) {
+
+        if (finalArray.length > 300) {
+            setTVLAmmt(finalArray.pop().y);
             return finalArray.splice(300);
         } else {
+            setTVLAmmt(finalArray.pop().y);
             return finalArray;
         }
     };
 
-    const data = {
-        datasets: [
-            {
-                data: getData(entireTVL),
+    const data = useMemo(() => {
+        return {
+            datasets: [
+                {
+                    data: getData(entireTVL),
 
-                /*data: [
+                    /*data: [
                     {x: '2021-08-08T13:12:23', y: 3},
                     {x: '2021-08-08T13:12:45', y: 5},
                     {x: '2021-08-08T13:12:46', y: 6},
@@ -84,136 +89,163 @@ export const NewChartEntire = (props: any) => {
                     {x: '2021-08-08T13:14:23', y: 9},
                     {x: '2021-08-08T13:16:45', y: 1}
                 ],*/
-                //data: this.props.data.map(({ anc_price }) =>
-                //  big(anc_price).toNumber(),
-                // ),
-                tension: 0.5,
-                borderColor: "rgb(251, 216, 93)",
-                borderWidth: 2,
-                pointRadius: 0.5,
-                fill: { target: "origin", above: getGradient() },
-            },
-        ],
-    };
+                    //data: this.props.data.map(({ anc_price }) =>
+                    //  big(anc_price).toNumber(),
+                    // ),
+                    tension: 0.5,
+                    borderColor: "rgb(251, 216, 93)",
+                    borderWidth: 2,
+                    pointRadius: 0.5,
+                    fill: { target: "origin", above: getGradient() },
+                },
+            ],
+        };
+    }, [entireTVL]);
 
     return (
-        <Container className="new-chart-entire" style={{ marginTop: "-30px" }}>
-            <Line
-                data={data}
-                options={{
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    plugins: {
-                        //@ts-ignore
-                        tooltip: {
-                            enabled: false,
-
-                            external: ({ chart, tooltip }) => {
-                                let element = tooltipRef.current!;
-
-                                if (tooltip.opacity === 0) {
-                                    element.style.opacity = "0";
-                                    return;
-                                }
-
-                                const div1 = document.getElementById("div2");
-                                const hr = document.getElementById("hr2");
-
-                                if (div1) {
-                                    try {
-                                        const i =
-                                            tooltip.dataPoints[0].dataIndex;
-                                        // const isLast =
-                                        //     i ===
-                                        //     data.datasets[0].data.length - 1;
-                                        const item = data.datasets[0].data[i];
-                                        const deposits = item.y;
-                                        // const borrows = item.y;
-                                        const date = new Date(item.x);
-
-                                        div1.innerHTML = `
-                    <span>$ ${numberWithCommas(deposits.toFixed(2))} UST ${date
-                                            .toString()
-                                            .slice(0, 10)}
-                    </span>`;
-                                    } catch {}
-                                }
-
-                                if (hr) {
-                                    hr.style.top =
-                                        chart.scales.y.paddingTop + "px";
-                                    hr.style.height =
-                                        chart.scales.y.height + "px";
-                                }
-
-                                element.style.opacity = "1";
-                                element.style.transform = `translateX(${tooltip.caretX}px)`;
-                            },
-                        },
-
-                        legend: { display: false },
-                    },
-                    interaction: {
-                        intersect: false,
-                        mode: "index",
-                    },
-
-                    scales: {
-                        x: {
-                            offset: true,
-                            type: "timeseries",
-                            time: {
-                                unit: "minute",
-                                //@ts-ignore
-                                min: String(data.datasets[0].data[0].x),
-                                max: String(data.datasets[0].data.pop().x),
-                            },
-                            bounds: "data",
-                            ticks: {
-                                display: false,
-                                autoSkipPadding: 30,
-                            },
-                            grid: {
-                                display: false,
-                            },
-                        },
-
-                        y: {
-                            beginAtZero: false,
-                            ticks: {
-                                display: false,
-                            },
-                            grid: {
-                                display: false,
-                                drawBorder: false,
-                            },
-                        },
-
-                        //@ts-ignore
-                    },
-                }}
-                height={320}
-                width={"100%"}
-                style={{ border: "none" }}
-            />
-            <ChartTooltip ref={tooltipRef} id="tt">
-                <hr id="hr2" />
-                <section
-                    id="div2"
+        <>
+            {tvlAmmt && (
+                <p
                     style={{
-                        backgroundColor: "#493C3C",
-                        padding: "5px 7px 5px 7px",
-                        fontSize: "10px",
-                        borderRadius: "20px",
+                        fontWeight: "800",
+                        fontSize: "35px",
                     }}
-                ></section>
-            </ChartTooltip>
-        </Container>
+                >
+                    {numberWithCommas(Number(tvlAmmt.toFixed(3)))}{" "}
+                    <span style={{ fontSize: "20px" }}>USD</span>
+                </p>
+            )}
+            <Container
+                className="new-chart-entire"
+                style={{ marginTop: "-30px" }}
+            >
+                <Line
+                    data={data}
+                    options={{
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        plugins: {
+                            //@ts-ignore
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        return `$ ${numberWithCommas(
+                                            data.datasets[0].data[
+                                                tooltipItem.dataIndex
+                                            ].y.toFixed(2)
+                                        )} USD`;
+                                    },
+                                },
+                                external: ({ chart, tooltip }) => {
+                                    let element = tooltipRef.current!;
+
+                                    if (tooltip.opacity === 0) {
+                                        element.style.opacity = "0";
+                                        return;
+                                    }
+
+                                    const div1 =
+                                        document.getElementById("div2");
+                                    const hr = document.getElementById("hr2");
+
+                                    if (div1) {
+                                        try {
+                                            const i =
+                                                tooltip.dataPoints[0].dataIndex;
+                                            // const isLast =
+                                            //     i ===
+                                            //     data.datasets[0].data.length - 1;
+                                            const item =
+                                                data.datasets[0].data[i];
+                                            const deposits = item.y;
+                                            // const borrows = item.y;
+                                            const date = new Date(item.x);
+
+                                            div1.innerHTML = `
+                    <span>$ ${numberWithCommas(deposits.toFixed(2))} USD ${date
+                                                .toString()
+                                                .slice(0, 10)}
+                    </span>`;
+                                        } catch {}
+                                    }
+
+                                    if (hr) {
+                                        hr.style.top =
+                                            chart.scales.y.paddingTop + "px";
+                                        hr.style.height =
+                                            chart.scales.y.height + "px";
+                                    }
+
+                                    element.style.opacity = "1";
+                                    element.style.transform = `translateX(${tooltip.caretX}px)`;
+                                },
+                            },
+
+                            legend: { display: false },
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: "index",
+                        },
+
+                        scales: {
+                            x: {
+                                offset: true,
+                                type: "timeseries",
+                                time: {
+                                    unit: "minute",
+                                    //@ts-ignore
+                                    min: String(data.datasets[0].data[0].x),
+                                    max: String(data.datasets[0].data.pop().x),
+                                },
+                                bounds: "data",
+                                ticks: {
+                                    display: false,
+                                    autoSkipPadding: 30,
+                                },
+                                grid: {
+                                    display: false,
+                                },
+                            },
+
+                            y: {
+                                beginAtZero: false,
+                                ticks: {
+                                    display: false,
+                                },
+                                grid: {
+                                    display: false,
+                                    drawBorder: false,
+                                },
+                            },
+
+                            //@ts-ignore
+                        },
+                    }}
+                    height={320}
+                    width={"100%"}
+                    style={{ border: "none" }}
+                />
+                <ChartTooltip ref={tooltipRef} id="tt">
+                    <hr id="hr2" />
+                    <section
+                        id="div2"
+                        style={{
+                            backgroundColor: "#493C3C",
+                            padding: "5px 7px 5px 7px",
+                            fontSize: "10px",
+                            borderRadius: "20px",
+                        }}
+                    ></section>
+                </ChartTooltip>
+            </Container>
+        </>
     );
 };
 
 export const NewChartCalc = (props: any) => {
-    let tooltipRef = React.useRef<any>();
+    let tooltipRef = useRef<any>();
     const getGradient = () => {
         const canvas = document.createElement("canvas");
         const myChartRef: any = canvas.getContext("2d");
@@ -363,7 +395,7 @@ export const NewChartCalc = (props: any) => {
                                             div1.innerHTML = `
                     <span>$ ${numberWithCommas(
                         Number(deposits.toFixed(2))
-                    )} UST ${date.toString().slice(0, 10)}
+                    )} USD ${date.toString().slice(0, 10)}
                     </span>`;
                                         } catch {}
                                     }
