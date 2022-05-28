@@ -80,18 +80,6 @@ export const NewChartEntire = (props: any) => {
             datasets: [
                 {
                     data: getData(entireTVL),
-
-                    /*data: [
-                    {x: '2021-08-08T13:12:23', y: 3},
-                    {x: '2021-08-08T13:12:45', y: 5},
-                    {x: '2021-08-08T13:12:46', y: 6},
-                    {x: '2021-08-08T13:13:11', y: 3},
-                    {x: '2021-08-08T13:14:23', y: 9},
-                    {x: '2021-08-08T13:16:45', y: 1}
-                ],*/
-                    //data: this.props.data.map(({ anc_price }) =>
-                    //  big(anc_price).toNumber(),
-                    // ),
                     tension: 0.5,
                     borderColor: "rgb(251, 216, 93)",
                     borderWidth: 2,
@@ -117,7 +105,7 @@ export const NewChartEntire = (props: any) => {
             )}
             <Container
                 className="new-chart-entire"
-                style={{ marginTop: "-30px" }}
+                style={{ marginTop: "-30px", position: "relative" }}
             >
                 <Line
                     data={data}
@@ -127,7 +115,7 @@ export const NewChartEntire = (props: any) => {
                         plugins: {
                             //@ts-ignore
                             tooltip: {
-                                enabled: true,
+                                enabled: false,
                                 callbacks: {
                                     label: function (tooltipItem) {
                                         return `$ ${numberWithCommas(
@@ -305,7 +293,6 @@ export const NewChartCalc = (props: any) => {
     };
 
     const data: any = {
-        //labels: ["02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00"],
         datasets: [
             {
                 label: false,
@@ -315,17 +302,6 @@ export const NewChartCalc = (props: any) => {
                     props.years,
                     props.amount
                 ),
-                // data: [
-                //     { x: "2021-08-08T13:12:23", y: 3 },
-                //     { x: "2021-08-08T13:12:45", y: 5 },
-                //     { x: "2021-08-08T13:12:46", y: 6 },
-                //     { x: "2021-08-08T13:13:11", y: 3 },
-                //     { x: "2021-08-08T13:14:23", y: 9 },
-                //     { x: "2021-08-08T13:16:45", y: 1 },
-                // ],
-                //data: this.props.data.map(({ anc_price }) =>
-                //  big(anc_price).toNumber(),
-                // ),
                 tension: 0.5,
                 borderColor: "rgb(0,0,0,)",
                 borderWidth: 2,
@@ -334,17 +310,6 @@ export const NewChartCalc = (props: any) => {
                 label: false,
                 pointRadius: 0,
                 data: getData(props.rate, props.years, props.amount),
-                // data: [
-                //     { x: "2021-08-08T13:12:23", y: 3 },
-                //     { x: "2021-08-08T13:12:45", y: 5 },
-                //     { x: "2021-08-08T13:12:46", y: 6 },
-                //     { x: "2021-08-08T13:13:11", y: 3 },
-                //     { x: "2021-08-08T13:14:23", y: 9 },
-                //     { x: "2021-08-08T13:16:45", y: 1 },
-                // ],
-                //data: this.props.data.map(({ anc_price }) =>
-                //  big(anc_price).toNumber(),
-                // ),
                 tension: 0.5,
                 borderColor: "rgb(251, 216, 93)",
                 borderWidth: 2,
@@ -353,7 +318,10 @@ export const NewChartCalc = (props: any) => {
         ],
     };
     return (
-        <Container className="new-chart-earnings">
+        <Container
+            className="new-chart-earnings"
+            style={{ position: "relative" }}
+        >
             {
                 //@ts-ignore
                 <Line
