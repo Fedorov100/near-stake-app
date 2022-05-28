@@ -258,16 +258,6 @@ export default function Dashboard({ className }: DashboardProps) {
                             >
                                 TVL OF THE ENTIRE ECOSYSTEM
                             </Typography>
-                            <p
-                                style={{
-                                    fontWeight: "800",
-                                    fontSize: "35px",
-                                }}
-                            >
-                                525,859,532,875{" "}
-                                <span style={{ fontSize: "20px" }}>USD</span>
-                            </p>
-
                             <NewChartEntire />
                         </Styled.StyledSection>
                     </div>

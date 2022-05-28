@@ -9,7 +9,7 @@ export interface ViewAddressStrikeProps {
 export function ViewAddressWarning({ children }: ViewAddressStrikeProps) {
     return (
         <Tooltip
-            title="Currently in “View an Address” mode. To make transactions, please disconnect and reconnect using Terra Station (extension or mobile)."
+            title="Currently in “View an Address” mode. To make transactions, please disconnect and reconnect using Near Station (extension or mobile)."
             placement="bottom"
         >
             <Warning>{children}</Warning>

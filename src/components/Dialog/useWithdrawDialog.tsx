@@ -16,16 +16,3 @@ export function useWithdrawDialog(
 ): [OpenDialog<FormParams, FormReturn>, ReactNode] {
     return useDialog<FormParams, FormReturn>(Component, coin);
 }
-
-// function Component2(props: DialogProps<FormParams, FormReturn>) {
-//     return (
-//         <TerraWithdrawDialog2 {...props} />
-//     );
-// }
-
-// export function useWarningDialog(): [
-//     OpenDialog<FormParams, FormReturn>,
-//     ReactNode
-// ] {
-//     return useDialog<FormParams, FormReturn>(Component2);
-// }
