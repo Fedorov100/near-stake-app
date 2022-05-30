@@ -18,7 +18,6 @@ a {
 .menu {
     > div {
         padding: 6px 12px;
-
         display: flex;
         align-items: center;
 

@@ -16,7 +16,7 @@ export interface TooltipProps extends MuiTooltipProps {
 export function Tooltip({ arrow = true, ...props }: TooltipProps) {
     const classes = useTooltipStyle(props);
 
-    return <MuiTooltip classes={classes} arrow={arrow} {...props} />;
+    return <MuiTooltip classes={classes} style={{ color: "white", opacity: "1", height: "21px", width: "18px" }} arrow={arrow} {...props} />;
 }
 
 export const useTooltipStyle = makeStyles<NeumorphismTheme, TooltipProps>(

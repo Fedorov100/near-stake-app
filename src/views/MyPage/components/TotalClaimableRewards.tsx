@@ -12,7 +12,7 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
         <Section className={`${className} NeuSection-root`}>
             <div className="NeuSection-content">
                 <header>
-                    <h4 style={{ width: "85%", marginBottom: "5px" }}>
+                    <h4 style={{ width: "85%", }}>
                         <MyTool title="Total payed interest of your UST/Luna Deposits calculated in UST">
                             <span
                                 style={{
@@ -23,6 +23,15 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
                                 }}
                             >
                                 TOTAL PAYED INTEREST{" "}
+                                <InfoTooltip
+                                    style={{
+                                        fontSize: "18px",
+                                        verticalAlign: "middle",
+                                        marginTop: "10px"
+                                    }}
+                                >
+                                    Total days staked with no withdraw
+                                </InfoTooltip>
                             </span>
                         </MyTool>
                     </h4>

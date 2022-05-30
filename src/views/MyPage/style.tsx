@@ -64,7 +64,7 @@ export const BAmount = styled(Typography)`
 
 export const StyledDepositButtons = styled.div`
     align-self: center;
-    margin-top: 55px;
+    margin-top: 45px;
     button {
         height: 45px;
         width: 200px;

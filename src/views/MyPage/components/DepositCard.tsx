@@ -26,7 +26,7 @@ export default function DepositCard({
         <>
             <Section
                 className="NeuSection-root deposit2"
-                style={{ margin: 0, height: "100%" }}
+                style={{ margin: 0, height: "252px", marginBottom: "5px" }}
             >
                 <div className="NeuSection-content" style={{ height: "100%" }}>
                     <div
@@ -74,7 +74,8 @@ export default function DepositCard({
                                     sx={{
                                         display: "flex",
                                         alignItems: "center",
-                                        justifyContent: "space-between",
+                                        justifyContent: "center",
+                                        paddingRight: "17px"
                                     }}
                                 >
                                     <Box
@@ -106,6 +107,7 @@ export default function DepositCard({
                                             display: "flex",
                                             alignItems: "flex-start",
                                             flexDirection: "column",
+                                            marginLeft: "35px"
                                         }}
                                     >
                                         <Box sx={{ display: "flex" }}>

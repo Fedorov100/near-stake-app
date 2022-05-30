@@ -92,8 +92,8 @@ function NavMenu({ to, title }: RouteMenu) {
             data-active={!!match}
             style={{
                 height: "53px",
-                paddingLeft: "20px",
-                paddingRight: "20px",
+                paddingLeft: "10px",
+                paddingRight: "10px",
             }}
         >
             <Link to={to}>{title}</Link>

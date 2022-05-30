@@ -138,8 +138,8 @@ export const LockedChart = ({ data, rate }: any) => {
             style={{
                 width: "100%",
                 position: "relative",
-                height: "300px",
-                marginTop: "-30px",
+                height: "270px",
+                marginTop: "0px",
             }}
         >
             <canvas ref={canvasRef} id="lockedChart" />
