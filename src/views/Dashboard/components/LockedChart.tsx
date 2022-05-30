@@ -64,7 +64,7 @@ export const LockedChart = ({ data, rate }: any) => {
                                     div1.innerHTML = `
                     <span>$  UST ${date.toString().slice(0, 10)}
                     </span>`;
-                                } catch {}
+                                } catch { }
                             }
 
                             if (hr) {
@@ -138,8 +138,8 @@ export const LockedChart = ({ data, rate }: any) => {
             style={{
                 width: "100%",
                 position: "relative",
-                height: "330px",
-                marginTop: "30px",
+                height: "300px",
+                marginTop: "-30px",
             }}
         >
             <canvas ref={canvasRef} id="lockedChart" />

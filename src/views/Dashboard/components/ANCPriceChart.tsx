@@ -105,7 +105,7 @@ export const NewChartEntire = (props: any) => {
             )}
             <Container
                 className="new-chart-entire"
-                style={{ marginTop: "-30px", position: "relative" }}
+                style={{ position: "relative", right: "25px", bottom: "73px", width: "105%" }}
             >
                 <Line
                     data={data}
@@ -152,10 +152,10 @@ export const NewChartEntire = (props: any) => {
 
                                             div1.innerHTML = `
                     <span>$ ${numberWithCommas(deposits.toFixed(2))} USD ${date
-                                                .toString()
-                                                .slice(0, 10)}
+                                                    .toString()
+                                                    .slice(0, 10)}
                     </span>`;
-                                        } catch {}
+                                        } catch { }
                                     }
 
                                     if (hr) {
@@ -362,10 +362,10 @@ export const NewChartCalc = (props: any) => {
 
                                             div1.innerHTML = `
                     <span>$ ${numberWithCommas(
-                        Number(deposits.toFixed(2))
-                    )} USD ${date.toString().slice(0, 10)}
+                                                Number(deposits.toFixed(2))
+                                            )} USD ${date.toString().slice(0, 10)}
                     </span>`;
-                                        } catch {}
+                                        } catch { }
                                     }
 
                                     if (hr) {

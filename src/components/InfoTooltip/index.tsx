@@ -32,7 +32,7 @@ export function PointerTooltip({
     ...tooltipProps
 }: InfoTooltipProps) {
     return (
-        <sup style={{ cursor: "help" }}>
+        <sup style={{ cursor: "help", color: "white" }}>
             <Tooltip {...tooltipProps} title={children} placement={placement}>
                 <InfoOutlined />
             </Tooltip>

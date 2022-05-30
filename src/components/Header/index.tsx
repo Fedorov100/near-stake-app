@@ -52,7 +52,7 @@ export default function Header({ className }: DesktopHeaderProps) {
     }, [openWalletDialog]);
 
     return (
-        <Container>
+        <Container style={{ marginTop: "14px" }}>
             <div className={"menu-wrap"}>
                 <nav className="menu">
                     {menus.map((itemMenu: RouteMenu) => (

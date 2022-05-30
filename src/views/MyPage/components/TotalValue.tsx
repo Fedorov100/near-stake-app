@@ -128,7 +128,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                     </div>
                 </header>
 
-                <div className="values">
+                <div className="values" style={{ marginTop: "-30px" }}>
                     <ul>
                         {/* <li
                             key={"Total Balance"}
