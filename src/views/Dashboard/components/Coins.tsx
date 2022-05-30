@@ -21,16 +21,16 @@ export default function Coins() {
 
     return (
         <Styled.StyledSection>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} style={Styled.thead_style} aria-label="simple table">
                 <TableHead>
-                    <Styled.TR>
+                    <Styled.TR style={{ marginTop: "20px" }}>
                         <Styled.TD header={true.toString()} align="left">
                             Name
                         </Styled.TD>
-                        <Styled.TD header={true.toString()} align="center">
+                        <Styled.TD header={true.toString()} align="right" style={{ position: "relative", right: "7px" }}>
                             APY
                         </Styled.TD>
-                        <Styled.TD header={true.toString()} align="center">
+                        <Styled.TD header={true.toString()} style={{ paddingLeft: "100px" }} align="center">
                             TVL
                         </Styled.TD>
                         <Styled.TD header={true.toString()} align="center">
@@ -59,13 +59,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right" style={{ marginRight: "20px" }}>14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>47,243,230 USDC</span>
@@ -119,13 +119,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>10,243,230 USDT</span>
@@ -177,13 +177,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>7,443,230 DAI</span>
@@ -235,13 +235,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>243,230 USN</span>
@@ -295,13 +295,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>10,230.00 wBTC</span>
@@ -353,13 +353,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>3,230.00 ETH</span>
@@ -413,13 +413,13 @@ export default function Coins() {
                                 </Box>
                             </Styled.CNContainer>
                         </Styled.TD>
-                        <Styled.TD align="center">14,87%</Styled.TD>
-                        <Styled.TD align="center">
+                        <Styled.TD align="right">14,87%</Styled.TD>
+                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                             <Box
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+                                    alignItems: "left",
                                 }}
                             >
                                 <span>116,829.00 wNEAR</span>

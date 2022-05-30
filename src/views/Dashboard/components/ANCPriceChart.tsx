@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Container } from "@mui/material";
+import { Container as MuiContainer } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
 import { ChartTooltip } from "./style";
 import { de } from "date-fns/locale";
 import axios from "axios";
+import styled from "styled-components";
 
 export function numberWithCommas(num: number) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -103,10 +104,7 @@ export const NewChartEntire = (props: any) => {
                     <span style={{ fontSize: "20px" }}>USD</span>
                 </p>
             )}
-            <Container
-                className="new-chart-entire"
-                style={{ marginTop: "-30px", position: "relative" }}
-            >
+            <Container>
                 <Line
                     data={data}
                     options={{
@@ -152,10 +150,10 @@ export const NewChartEntire = (props: any) => {
 
                                             div1.innerHTML = `
                     <span>$ ${numberWithCommas(deposits.toFixed(2))} USD ${date
-                                                .toString()
-                                                .slice(0, 10)}
+                                                    .toString()
+                                                    .slice(0, 10)}
                     </span>`;
-                                        } catch {}
+                                        } catch { }
                                     }
 
                                     if (hr) {
@@ -318,10 +316,7 @@ export const NewChartCalc = (props: any) => {
         ],
     };
     return (
-        <Container
-            className="new-chart-earnings"
-            style={{ position: "relative" }}
-        >
+        <Container>
             {
                 //@ts-ignore
                 <Line
@@ -362,10 +357,10 @@ export const NewChartCalc = (props: any) => {
 
                                             div1.innerHTML = `
                     <span>$ ${numberWithCommas(
-                        Number(deposits.toFixed(2))
-                    )} USD ${date.toString().slice(0, 10)}
+                                                Number(deposits.toFixed(2))
+                                            )} USD ${date.toString().slice(0, 10)}
                     </span>`;
-                                        } catch {}
+                                        } catch { }
                                     }
 
                                     if (hr) {
@@ -455,3 +450,10 @@ export const NewChartCalc = (props: any) => {
         </Container>
     );
 };
+
+const Container = styled(MuiContainer)`
+    position: relative;
+    right: 25px;
+    bottom: 73px;
+    width: 105%;
+`;

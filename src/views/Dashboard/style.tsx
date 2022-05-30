@@ -15,7 +15,9 @@ export const CoolInput = styled(Input)`
     font-size: 20px !important;
     font-weight: 800;
 `;
-
+export const thead_style = {
+    marginTop: "-60px"
+}
 export const TitleContainer = styled.div`
     margin-bottom: 25px;
 
@@ -109,6 +111,7 @@ export const Container = styled(PaddedLayout)`
     /* .underline-input:before {
     } */
     .new-chart {
+        
         height: 237px;
         width: 647px;
     }
@@ -596,7 +599,7 @@ export const Container = styled(PaddedLayout)`
                 table {
                     thead {
                         th {
-                            text-align: right;
+                            text-align: left;
 
                             &:first-child {
                                 font-weight: bold;
@@ -619,7 +622,7 @@ export const Container = styled(PaddedLayout)`
                             .name {
                                 font-size: 13px;
                                 color: ${({ theme }: any) =>
-                                    theme.dimTextColor};
+        theme.dimTextColor};
                             }
 
                             &:first-child > div {
@@ -1044,8 +1047,7 @@ export const Container = styled(PaddedLayout)`
 
 export const StyledSection = styled.section`
     background: #212121;
-    border-radius: 25px;
-
+    border-radius: 25px;  
     padding: 60px 50px;
     margin: 55px 0;
 `;
@@ -1140,7 +1142,7 @@ export const Button = styled(MuiButton)`
         variant === "contained"
             ? `background: #493C3C;`
             : variant === "outlined"
-            ? `border: 1px solid #CEBFBF;
+                ? `border: 1px solid #CEBFBF;
             color: #CEBFBF;`
-            : ``}
+                : ``}
 `;

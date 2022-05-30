@@ -42,7 +42,7 @@ export interface TabProps<T> extends TabBaseProps<T> {
 const defaultHeight: number = 60;
 const buttonPadding: number = 4; // top + bottom
 const defaultFontSize: number = 14;
-const defualtBorderRadius: number = 25;
+const defualtBorderRadius: number = 100;
 
 function TabBase<T>({
   className,
@@ -68,7 +68,7 @@ function TabBase<T>({
 
   return (
     <div
-      style={{background:"none", boxShadow:"none"}}
+      style={{ background: "none", boxShadow: "none" }}
       className={className}
       ref={divRef}
       aria-disabled={disabled || undefined}
@@ -180,7 +180,7 @@ export const Tab: <T>(props: TabProps<T>) => ReactElement<TabProps<T>> = styled(
       font-weight: 500;
 
       border-radius: ${({ borderRadius = defualtBorderRadius }) =>
-        borderRadius - buttonPadding / 2}px;
+    borderRadius - buttonPadding / 2}px;
     }
   }
     * {text-align:center;}
@@ -200,13 +200,13 @@ export const Tab: <T>(props: TabProps<T>) => ReactElement<TabProps<T>> = styled(
       height: 100%;
 
       border-radius: ${({ borderRadius = defualtBorderRadius }) =>
-        borderRadius - buttonPadding / 2}px;
+    borderRadius - buttonPadding / 2}px;
 
       overflow: hidden;
       box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.35);
           color: '#493B3B';
 
-          background-color: ${({theme}) => theme.textInput.backgroundColor};
+          background-color: ${({ theme }) => theme.textInput.backgroundColor};
 
 
       font-size: 13px;

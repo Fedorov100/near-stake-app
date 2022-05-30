@@ -18,7 +18,6 @@ a {
 .menu {
     > div {
         padding: 6px 12px;
-
         display: flex;
         align-items: center;
 
@@ -50,8 +49,7 @@ a {
     width: 1220px;
     display: inline-flex;
     align-content: start;
-    justify-content: space-between;
-    margin-left: -10px;
+    justify-content: space-between;    
 }
 display: flex;
 //justify-content: space-between;
