@@ -247,7 +247,7 @@ export default function Utility({ className }: BorrowProps) {
                 </h2>
                 <StyledSection
                     className={"bottom-sec"}
-                    style={{ marginTop: "20px" }}
+                    style={{ marginTop: "20px", width: "1220px", height: "389px" }}
                 >
                     <Grid container>
                         <Grid item md={6}>
@@ -267,14 +267,14 @@ export default function Utility({ className }: BorrowProps) {
                             <ActionButton
                                 className="claim"
                                 style={{
-                                    width: "50%",
-                                    marginTop: "30px",
+                                    width: "357px",
+                                    marginTop: "45px",
                                 }}
                             >
-                                SAVE MORE
+                                SAVE NOW
                             </ActionButton>
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item md={6} style={{ paddingLeft: "60px" }}>
                             <div className={"head1"}>
                                 QUALIFYING PHASE STATUS
                             </div>
@@ -298,25 +298,25 @@ export default function Utility({ className }: BorrowProps) {
                             <InSection
                                 className={"NeuSection-root bottom-desc"}
                             >
-                                <div className="NeuSection-content">
+                                <div className="NeuSection-content" style={{ padding: "20px 0px" }}>
                                     <div>
-                                        IF THE BUTTON IS GREEN, THIS MEANS EVERY
-                                        DEPOSIT DURING THIS PERIOD QUALIFIES YOU
-                                        FOR THE MONTHLY REWARDS+ PROGRAM.
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div>
-                                        IF THE BUTTON IS RED, THIS MEANS YOU
-                                        NEED TO KEEP YOUR BALANCE DEPOSITED TO
-                                        BECOME ELIGIBLE FOR THE NEXT QUALIFIYNG
-                                        PHASE.
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <div>
-                                        ALL PAYOUTS OF THE REWARDS+ PROGRAM ARE
-                                        AUTOMATED.
+                                        <div style={{ paddingTop: "30px" }}>
+                                            IF THE BUTTON IS GREEN, THIS MEANS EVERY
+                                            DEPOSIT DURING THIS PERIOD QUALIFIES YOU
+                                            FOR THE MONTHLY REWARDS+ PROGRAM.
+                                        </div>
+                                        <br></br>
+                                        <div>
+                                            IF THE BUTTON IS RED, THIS MEANS YOU
+                                            NEED TO KEEP YOUR BALANCE DEPOSITED TO
+                                            BECOME ELIGIBLE FOR THE NEXT QUALIFIYNG
+                                            PHASE.
+                                        </div>
+                                        <br />
+                                        <div style={{ paddingBottom: "30px" }}>
+                                            ALL PAYOUTS OF THE REWARDS+ PROGRAM ARE
+                                            AUTOMATED.
+                                        </div>
                                     </div>
                                 </div>
                             </InSection>

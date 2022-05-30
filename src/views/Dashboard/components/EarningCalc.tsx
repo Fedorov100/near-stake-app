@@ -109,7 +109,7 @@ export const EarningCalc = (props: any) => {
                         style={{ fontSize: "20px" }}
                         variant="standard"
                     >
-                        <MenuItem value={0.000509863}>STABLE COIN</MenuItem>
+                        <MenuItem value={0.000509863}>USDC</MenuItem>
                         <MenuItem value={0.000955342}>OTHER ASSEST</MenuItem>
                     </Select>
                 </FormControl>
@@ -123,8 +123,8 @@ export const EarningCalc = (props: any) => {
     const [choice, setChoice] = useState<any[]>([0.000509863, "NEAR"]);
     const [years, setYears] = useState<any>(10);
     const [interestEarnedResult, setInterestEarnedResult] =
-        useState<any>(5433.67);
-    const [amountEarnedResult, setAmountEarnedResult] = useState<any>(6433.67);
+        useState<any>(148700);
+    const [amountEarnedResult, setAmountEarnedResult] = useState<any>(448700);
 
     const onChangeSlider = (
         e: any,
@@ -166,7 +166,7 @@ export const EarningCalc = (props: any) => {
             <div className="NeuSection-content2">
                 <div className="input-formatter">
                     <div className="fields-input">
-                        <div className="fields-deposit">
+                        <div className="fields-deposit" style={{ marginTop: "61px" }}>
                             <ControlledOpenSelect
                                 choice={choice}
                                 setChoice={setChoice}
@@ -228,7 +228,10 @@ export const EarningCalc = (props: any) => {
                     <div
                         className="bottom-total"
                         style={{
-                            width: "250px",
+                            width: "167px",
+                            height: "177px",
+                            marginTop: "80px",
+                            marginLeft: "5px",
                             overflow: "visible",
                             zIndex: 1,
                         }}
@@ -240,7 +243,6 @@ export const EarningCalc = (props: any) => {
                             >
                                 ${" "}
                                 {numberWithCommas(Number(interestEarnedResult))}
-                                <span>USD</span>
                             </p>
                             <h2>Interest Earned</h2>
                             <div />
@@ -261,7 +263,6 @@ export const EarningCalc = (props: any) => {
                                     {numberWithCommas(
                                         Number(amountEarnedResult)
                                     )}
-                                    <span>USD</span>
                                 </p>
                                 <h2>Total</h2>
                             </span>
@@ -285,8 +286,9 @@ export const EarningCalc = (props: any) => {
                     <div
                         style={{
                             alignSelf: "end",
-                            width: "550px",
-                            height: "343px",
+                            width: "600px",
+                            marginLeft: "45px",
+                            height: "263px",
                             zIndex: 2,
                         }}
                     >
@@ -298,6 +300,6 @@ export const EarningCalc = (props: any) => {
                     </div>
                 </div>
             </div>
-        </StyledSection>
+        </StyledSection >
     );
 };

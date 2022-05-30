@@ -19,7 +19,8 @@ export const Buttons = styled.div`
 export const InSection = styled(Section)`
     background: #493c3c;
     border: 3px solid #ffffff;
-
+    width: 498px;
+    margin-top: 12px;
     height: 190px !important;
     font-size: 13px;
     font-weight: 860;
@@ -126,6 +127,7 @@ export const Container = styled(PaddedLayout)`
     .head1 {
         font-size: 20px;
         font-weight: 860;
+        letter-spacing: 0.1px;
     }
     .market {
         display: flex;

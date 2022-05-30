@@ -55,10 +55,10 @@ export default function Dashboard({ className }: DashboardProps) {
                         <PageTitle title="DASHBOARD" />
                     </Styled.TitleContainerAndExchangeRate>
 
-                    <div className="summary-section">
+                    <div className="summary-section" style={{ marginTop: "-20px" }}>
                         <Styled.StyledSection
                             className="total-value-locked"
-                            style={{ display: "flex" }}
+                            style={{ display: "flex", height: "434px" }}
                         >
                             <div
                                 style={{
@@ -154,7 +154,7 @@ export default function Dashboard({ className }: DashboardProps) {
                                         </div>
                                         <div
                                             className="tvl-balances"
-                                            style={{ height: "190px" }}
+                                            style={{ height: "190px", marginLeft: "-20px" }}
                                         >
                                             <h3>
                                                 <i
@@ -230,7 +230,7 @@ export default function Dashboard({ className }: DashboardProps) {
                                     width: "1px",
                                     height: "300px",
                                     marginRight: "50px",
-                                    marginLeft: "30px",
+                                    marginLeft: "20px",
                                     marginTop: "25px",
                                     marginBottom: "25px",
                                     borderLeft: "none",
@@ -253,6 +253,7 @@ export default function Dashboard({ className }: DashboardProps) {
                                 style={{
                                     fontWeight: "800",
                                     fontSize: "20px",
+                                    paddingRight: "73px 50px",
                                     marginBottom: "1px",
                                 }}
                             >

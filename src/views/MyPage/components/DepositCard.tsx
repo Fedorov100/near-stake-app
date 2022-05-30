@@ -6,6 +6,7 @@ import { Box, Grid } from "@mui/material";
 import { TokenIcon, Tokens } from "@libs/token-icons";
 import { InfoTooltip } from "components/InfoTooltip";
 import DepositButtons from "./DepoistButtons";
+import styled from "styled-components";
 
 export interface TokenCardProps {
     token: Tokens;
@@ -26,9 +27,9 @@ export default function DepositCard({
         <>
             <Section
                 className="NeuSection-root deposit2"
-                style={{ margin: 0, height: "100%" }}
+                style={{ margin: 0, height: "252px", marginBottom: "5px" }}
             >
-                <div className="NeuSection-content" style={{ height: "100%" }}>
+                <SectionContent>
                     <div
                         style={{
                             display: "flex",
@@ -73,8 +74,9 @@ export default function DepositCard({
                                 <Box
                                     sx={{
                                         display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
+                                        alignItems: "flex-start",
+                                        justifyContent: "center",
+                                        paddingRight: "17px"
                                     }}
                                 >
                                     <Box
@@ -106,6 +108,7 @@ export default function DepositCard({
                                             display: "flex",
                                             alignItems: "flex-start",
                                             flexDirection: "column",
+                                            marginLeft: "35px"
                                         }}
                                     >
                                         <Box sx={{ display: "flex" }}>
@@ -129,8 +132,13 @@ export default function DepositCard({
                             <DepositButtons />
                         </StyledDepositButtons>
                     </div>
-                </div>
+                </SectionContent>
             </Section>
         </>
     );
 }
+
+const SectionContent = styled.div`
+    padding: 57px 51px 57px 51px !important;
+    height: 100%;
+`;

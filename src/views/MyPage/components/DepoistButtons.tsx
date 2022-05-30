@@ -3,9 +3,14 @@ import { BorderButton } from "@libs/components/BorderButton";
 import { Box } from "@mui/material";
 import { useDepositDialog } from "components/Dialog/useDepositDialog";
 import { useWithdrawDialog } from "components/Dialog/useWithdrawDialog";
+import { useWallet } from "contexts/accounts";
+import { WalletConnection } from "near-api-js";
 import { useCallback } from "react";
 
 export default function DepositButtons() {
+    const wallet: WalletConnection = useWallet();
+    const connected = wallet.isSignedIn();
+
     const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
     const [openWithdrawDialog, withdrawDialogElement] = useWithdrawDialog("USDT");
 
@@ -16,6 +21,9 @@ export default function DepositButtons() {
     const openWithdraw = useCallback(async () => {
         await openWithdrawDialog();
     }, [openWithdrawDialog]);
+
+    const connectNearWallet = async () => {
+    };
 
     return (
         <Box
@@ -32,9 +40,9 @@ export default function DepositButtons() {
                         height: "45px",
                         marginRight: "12px",
                     }}
-                    onClick={openDeposit}
+                    onClick={() => connected ? openDeposit() : connectNearWallet()}
                 >
-                    Deposit
+                    {connected ? 'Deposit' : 'Connect Wallet'}
                 </ActionButton>
                 <BorderButton
                     className="sizeButton border"
@@ -43,9 +51,9 @@ export default function DepositButtons() {
                         height: "45px",
                         marginLeft: "12px",
                     }}
-                    onClick={openWithdraw}
+                    onClick={() => connected ? openWithdraw() : connectNearWallet()}
                 >
-                    Withdraw
+                    {connected ? 'Withdraw' : 'Connect Wallet'}
                 </BorderButton>
             </div>
             {depositDialogElement}
