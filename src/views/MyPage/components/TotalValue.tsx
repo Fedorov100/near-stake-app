@@ -34,28 +34,29 @@ function TotalValueBase({ className }: TotalValueProps) {
             totalBalance: {
                 label: "Total Balance",
                 tooltip: "Total amount of USD deposited and interest generated",
-                color: ["#F72585", "#493c3c"],
+                color: ["#493c3c", "#F72585"],
                 amount: 2665750.99,
             },
             totalValue: 2665750.99,
             data: [
                 {
                     label: "Total Balance",
-                    tooltip: "Total amount of USD deposited and interest generated",
+                    tooltip:
+                        "Total amount of USD deposited and interest generated",
                     amount: 2665750.99,
-                    color: ["#F72585", "#493c3c"],
+                    color: ["#493c3c", "#F72585"],
                 },
                 {
                     label: "Stable Balance",
                     tooltip: "Total amount of Stable Coins",
                     amount: 1999313.24,
-                    color: ["#000000", "#493c3c"],
+                    color: ["#493c3c", "#000000"],
                 },
                 {
                     label: "Volatile Asset Balance",
                     tooltip: "Total value of Volatile Assets held",
                     amount: 666437.74,
-                    color: ["#F9D85E", "#493c3c"],
+                    color: ["#493c3c", "#F9D85E"],
                 },
             ],
         };
@@ -176,7 +177,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                         {data.map(({ label, tooltip, amount, color }, i) => (
                             <li
                                 key={i}
-                                style={{ color: color[0] }}
+                                style={{ color: color[1] }}
                                 data-focus={i === focusedIndex}
                             >
                                 <i
@@ -202,8 +203,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                                         color: "#d8d0cd",
                                     }}
                                 >
-                                    ${' '}
-                                    {numberWithCommas(amount)}
+                                    $ {numberWithCommas(amount)}
                                     {` USD`}
                                     {/* {` ${symbol}`} */}
                                 </p>
@@ -212,7 +212,12 @@ function TotalValueBase({ className }: TotalValueProps) {
                     </ul>
 
                     {!isSmallLayout && (
-                        <div style={{ marginRight: "10%" }}>
+                        <div
+                            style={{
+                                marginRight: "35px",
+                                transform: "rotateX(180deg)",
+                            }}
+                        >
                             <DoughnutChart
                                 data={chartData!}
                                 onFocus={setFocusedIndex}
@@ -333,10 +338,10 @@ export const TotalValue = styled(TotalValueBase)`
         }
 
         canvas {
-            min-width: 230px;
-            min-height: 230px;
-            max-width: 230px;
-            max-height: 230px;
+            min-width: 215px;
+            min-height: 215px;
+            max-width: 215px;
+            max-height: 215px;
         }
     }
 
