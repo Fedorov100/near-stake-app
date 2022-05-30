@@ -36,7 +36,7 @@ export class DoughnutChart extends Component<DoughnutChartProps> {
 
     componentDidUpdate(prevProps: Readonly<DoughnutChartProps>) {
         if (this.props !== prevProps) {
-            console.log(this.props.data)
+            console.log(this.props.data);
             if (this.props.data.length > 2) {
                 this.chart.data.labels = this.props.data.map(
                     ({ label }) => label
@@ -50,16 +50,17 @@ export class DoughnutChart extends Component<DoughnutChartProps> {
                         if (i === 0) {
                         }
                         return {
-                            data: [value, total],
+                            data: [total, value],
                             backgroundColor: color,
                             borderWidth: 0,
-                            hoverOffset: 5,
+                            hoverOffset: 2,
                             borderRadius: 15,
-                            spacing: 0,
+                            spacing: -15,
                             radius: radiusValues[i],
                             cutout: cutoutValues[i],
                             margin: "5px",
                             borderJoinStyle: "round",
+                            rotation: 180,
                         };
                     }
                 );
