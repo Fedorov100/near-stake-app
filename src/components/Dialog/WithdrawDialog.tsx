@@ -10,6 +10,7 @@ import { IconSpan } from "@libs/components/IconSpan";
 import { Dialog } from "@libs/components/Dialog";
 import { NumberInput } from "@libs/components/NumberInput";
 import { UpdateBalanceButton } from "views/Earn/components/TotalDepositSection";
+import { SliderValueLabelUnstyled } from "@mui/base";
 
 function WithdrawDialogBase(props: any) {
     const {
@@ -49,7 +50,9 @@ function WithdrawDialogBase(props: any) {
                     maxDecimalPoints={3}
                     label="AMOUNT"
                     error={!!invalidWithdrawAmount}
-                    onChange={({ target }: ChangeEvent<HTMLInputElement>) => {}}
+                    onChange={({ target }: ChangeEvent<HTMLInputElement>) => {
+                        updateWithdrawAmount(target.value)
+                    }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
@@ -67,7 +70,7 @@ function WithdrawDialogBase(props: any) {
                             style={{
                                 cursor: "pointer",
                             }}
-                            onClick={() => {}}
+                            onClick={() => { }}
                         >
                             {Number(totalDeposit.div(100))}
                             {` ${"USDT"}`}
@@ -76,7 +79,7 @@ function WithdrawDialogBase(props: any) {
                 </div>
                 <UpdateBalanceButton
                     coin={coin}
-                    proceed1={() => {}}
+                    proceed1={() => { }}
                     className={"update"}
                 />
 
@@ -85,7 +88,9 @@ function WithdrawDialogBase(props: any) {
                         max={Number(totalDeposit.div(100))}
                         txFee={Number(txFee ?? "0")}
                         value={Number(withdrawAmount)}
-                        onChange={(value: any) => {}}
+                        onChange={value => {
+                            updateWithdrawAmount(value.toFixed(2))
+                        }}
                     />
                 </figure>
                 {

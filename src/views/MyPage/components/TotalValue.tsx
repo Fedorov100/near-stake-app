@@ -112,7 +112,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                     </div>
                     <div style={{ fontSize: "9px" }}>
                         <a
-                            href="https://app.terraswap.io/swap?to=&type=swap&from=uluna"
+                            href="https://www.coinspot.com.au/swap/near"
                             style={{ textDecoration: "inherit" }}
                         >
                             <BorderButton
