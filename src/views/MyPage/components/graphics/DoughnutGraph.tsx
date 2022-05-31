@@ -1,7 +1,5 @@
-import { Chart, registerables } from "chart.js";
+import { Chart } from "chart.js";
 import { Component, createRef } from "react";
-
-Chart.register(...registerables);
 
 export interface ChartItem {
     label: string;

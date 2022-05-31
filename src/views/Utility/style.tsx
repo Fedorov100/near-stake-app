@@ -81,10 +81,16 @@ export const Container = styled(PaddedLayout)`
     }
 
     .bottom-desc {
-        .NeuSection-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .description {
+            margin-right: 38px;
+            font-style: normal;
+            font-weight: 860;
+            font-size: 13px;
+            line-height: 120%;
+            letter-spacing: 0.1px;
+            /* or 16px */
+
+            color: #ffffff;
         }
     }
 
@@ -123,11 +129,19 @@ export const Container = styled(PaddedLayout)`
     .numbers {
         font-size: 35px;
         font-weight: 860;
+        margin-top: 5px;
     }
     .head1 {
         font-size: 20px;
         font-weight: 860;
         letter-spacing: 0.1px;
+        display: flex;
+        align-items: center;
+        sup {
+            display: flex;
+            align-items: center;
+            margin-left: 9px;
+        }
     }
     .market {
         display: flex;

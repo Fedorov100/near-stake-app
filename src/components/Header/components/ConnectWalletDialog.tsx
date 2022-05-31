@@ -1,74 +1,69 @@
+import React from "react";
 import { Dialog } from "@libs/components/Dialog";
 import { UIElementProps } from "@libs/ui/UIElementProps";
 import { Box, Grid, Modal as MuiModal } from "@mui/material";
 import styled from "styled-components";
 import { Near, Sender } from "@libs/icons";
-import ConnectWatiting from "./ConnectWatiting";
-import ConnectFailed from "./ConnectFailed";
 import { useWallet } from "contexts/accounts";
 import { WalletConnection } from "near-api-js";
+import { useConnectWaitingDialog } from "./useConnectWalletDialog";
 
 interface ConnectWalletDialogProps extends UIElementProps {
     closeDialog: (returnValue: void) => void;
-    open: boolean;
-    isWaiting: boolean;
-    isFailed: boolean;
-    setWaiting: (value: boolean) => void;
 }
 
-export default function ConnectWalletDialogBase(
-    props: ConnectWalletDialogProps
-) {
+export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
     const wallet: WalletConnection = useWallet();
+    const [openConnectWaitingDialog, walletConnectWaitingDialogElement] =
+        useConnectWaitingDialog();
+
+    const connectWaiting = async () => {
+        await openConnectWaitingDialog();
+    };
 
     const connectNearWallet = async () => {
-        props.setWaiting(true);
+        connectWaiting();
         wallet.requestSignIn();
     };
 
-    if (props.isFailed) {
-        return <ConnectFailed {...props} />;
-    }
-
-    if (props.isWaiting) {
-        return <ConnectWatiting {...props} />;
-    }
-
     return (
-        <Modal open={props.open} onClose={() => props.closeDialog()}>
-            <Dialog onClose={() => props.closeDialog()}>
-                <Box
-                    className="content"
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                        justifyContent: "center",
-                        width: "100%",
-                    }}
-                >
-                    <h4 className="title">Connect wallet</h4>
-                    <p>Please select a wallet to connect to this dApp:</p>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Box
-                                className="wallet-item"
-                                onClick={() => connectNearWallet()}
-                            >
-                                <Near viewBox="0 0 49 49" />
-                                <WalletName>Near Wallet</WalletName>
-                            </Box>
+        <React.Fragment>
+            <Modal open onClose={() => props.closeDialog()}>
+                <Dialog onClose={() => props.closeDialog()}>
+                    <Box
+                        className="content"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "start",
+                            justifyContent: "center",
+                            width: "100%",
+                        }}
+                    >
+                        <h4 className="title">Connect wallet</h4>
+                        <p>Please select a wallet to connect to this dApp:</p>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                                <Box
+                                    className="wallet-item"
+                                    onClick={() => connectNearWallet()}
+                                >
+                                    <Near viewBox="0 0 49 49" />
+                                    <WalletName>Near Wallet</WalletName>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Box className="wallet-item">
+                                    <Sender viewBox="0 0 49 49" />
+                                    <WalletName>Sender</WalletName>
+                                </Box>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Box className="wallet-item">
-                                <Sender viewBox="0 0 49 49" />
-                                <WalletName>Sender</WalletName>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Dialog>
-        </Modal>
+                    </Box>
+                </Dialog>
+            </Modal>
+            {walletConnectWaitingDialogElement}
+        </React.Fragment>
     );
 }
 

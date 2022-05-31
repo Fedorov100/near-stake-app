@@ -13,7 +13,6 @@ export const buttonBaseStyle = css`
     user-select: none;
 
     font-size: 14px;
-    font-weight: 500;
     text-align: center;
     color: ${({ theme }) => theme.actionButton.textColor};
 `;
@@ -26,14 +25,20 @@ export const buttonBaseStyle = css`
 export const BorderButton = styled(ButtonBase).attrs({ disableRipple: true })`
     ${buttonBaseStyle};
 
-    font-weight: 860;
+    font-weight: 800;
     color: #cebfbf;
     border: 1px solid #cebfbf;
+    svg {
+        fill: #cebfbf;
+    }
 
     &:hover {
         border: 1px solid #cebfbf;
         background-color: ${({ theme }) => theme.hoverBackgroundColor};
         color: ${({ theme }) => theme.borderButton.hoverTextColor};
+        svg {
+            fill: #ffffff;
+        }
     }
 
     &:disabled {

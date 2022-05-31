@@ -3,6 +3,7 @@ import { WalletConnection } from "near-api-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./Router";
+import "./config/chartjs";
 
 export default function App() {
     const [wallet, setWallet] = useState<WalletConnection | undefined>(
