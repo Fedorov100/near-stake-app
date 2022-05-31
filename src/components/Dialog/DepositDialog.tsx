@@ -10,6 +10,7 @@ import { Dialog } from "@libs/components/Dialog";
 import { NumberInput } from "@libs/components/NumberInput";
 import * as BaseStyled from "views/Dashboard/style";
 import { TokenIcon } from "@libs/token-icons";
+import { getCoinDetail } from "@libs/tokens";
 
 function DepositDialogBase(props: any) {
     const {
@@ -31,6 +32,8 @@ function DepositDialogBase(props: any) {
         toggled,
         setToggled,
     } = props;
+
+    const tokenDetail = getCoinDetail(coin);
 
     return (
         <Modal open onClose={() => closeDialog()}>
@@ -55,7 +58,7 @@ function DepositDialogBase(props: any) {
                     >
                         <BaseStyled.CNContainer>
                             <TokenIcon
-                                token={'usdt'}
+                                token={coin}
                                 style={{
                                     width: "33px",
                                     height: "33px",
@@ -70,10 +73,10 @@ function DepositDialogBase(props: any) {
                                 }}
                             >
                                 <BaseStyled.TokenName>
-                                    {'USDT'}
+                                    {tokenDetail.name}
                                 </BaseStyled.TokenName>
                                 <BaseStyled.TokenDes>
-                                    {'USD Tether'}
+                                    {tokenDetail.description}
                                 </BaseStyled.TokenDes>
                             </Box>
                         </BaseStyled.CNContainer>
@@ -121,7 +124,9 @@ function DepositDialogBase(props: any) {
                         max={Number(maxAmount)}
                         txFee={Number(txFee ?? "0")}
                         value={Number(depositAmount)}
-                        onChange={(value) => { updateDepositAmount(value.toFixed(2)) }}
+                        onChange={(value) => {
+                            updateDepositAmount(value.toFixed(2));
+                        }}
                     />
                 </figure>
 

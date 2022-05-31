@@ -3,14 +3,14 @@ import * as BaseStyled from "views/Dashboard/style";
 import { BalanceTitle, BAmount, Section, StyledDepositButtons } from "../style";
 
 import { Box, Grid } from "@mui/material";
-import { TokenIcon, Tokens } from "@libs/token-icons";
+import { TokenIcon } from "@libs/token-icons";
 import { InfoTooltip } from "components/InfoTooltip";
 import DepositButtons from "./DepoistButtons";
 import styled from "styled-components";
+import { Coin, getCoinDetail } from "@libs/tokens";
 
 export interface TokenCardProps {
-    token: Tokens;
-    tokenName: string;
+    token: Coin;
     saveBalance: string;
     saveUSDBalance: string;
     apy: string;
@@ -18,11 +18,11 @@ export interface TokenCardProps {
 
 export default function DepositCard({
     token,
-    tokenName,
     saveBalance,
     saveUSDBalance,
     apy,
 }: TokenCardProps) {
+    const tokenDetail = getCoinDetail(token);
     return (
         <>
             <Section
@@ -62,10 +62,10 @@ export default function DepositCard({
                                         }}
                                     >
                                         <BaseStyled.TokenName>
-                                            {token.toUpperCase()}
+                                            {tokenDetail.name}
                                         </BaseStyled.TokenName>
                                         <BaseStyled.TokenDes>
-                                            {tokenName}
+                                            {tokenDetail.description}
                                         </BaseStyled.TokenDes>
                                     </Box>
                                 </BaseStyled.CNContainer>
@@ -76,7 +76,7 @@ export default function DepositCard({
                                         display: "flex",
                                         alignItems: "flex-start",
                                         justifyContent: "center",
-                                        paddingRight: "17px"
+                                        paddingRight: "17px",
                                     }}
                                 >
                                     <Box
@@ -108,7 +108,7 @@ export default function DepositCard({
                                             display: "flex",
                                             alignItems: "flex-start",
                                             flexDirection: "column",
-                                            marginLeft: "35px"
+                                            marginLeft: "35px",
                                         }}
                                     >
                                         <Box sx={{ display: "flex" }}>
@@ -129,7 +129,7 @@ export default function DepositCard({
                             </Grid>
                         </Grid>
                         <StyledDepositButtons>
-                            <DepositButtons />
+                            <DepositButtons coin={token} />
                         </StyledDepositButtons>
                     </div>
                 </SectionContent>

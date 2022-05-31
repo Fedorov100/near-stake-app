@@ -6,7 +6,7 @@ import { useConnectWalletDialog } from "components/Header/components/useConnectW
 import { WalletConnection } from "near-api-js";
 import { useWallet } from "contexts/accounts";
 import CoinItem from "./CoinItem";
-import { Symbols, symbols } from "@libs/tokens";
+import { Coin, coins } from "@libs/tokens";
 
 export default function Coins() {
     const wallet: WalletConnection = useWallet();
@@ -51,7 +51,7 @@ export default function Coins() {
                     </Styled.TR>
                 </TableHead>
                 <TableBody>
-                    {symbols.map((item: Symbols, key: number) => (
+                    {coins.map((item: Coin, key: number) => (
                         <CoinItem
                             key={key}
                             coin={item}

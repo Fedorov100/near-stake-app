@@ -3,12 +3,12 @@ import * as Styled from "../style";
 
 import { Box } from "@mui/material";
 import { TokenIcon } from "@libs/token-icons";
-import { getCoinDetail, Symbols } from "@libs/tokens";
+import { getCoinDetail, Coin } from "@libs/tokens";
 import { useDepositDialog } from "components/Dialog/useDepositDialog";
 import { useWithdrawDialog } from "components/Dialog/useWithdrawDialog";
 
 interface CoinItemProps {
-    coin: Symbols;
+    coin: Coin;
     connected: boolean;
     openConnectNearWallet: () => void;
 }

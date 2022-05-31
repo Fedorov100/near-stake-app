@@ -1,4 +1,5 @@
 import { Tab } from "@libs/components/Tab";
+import { Coin, coins as allCoins, stableCoins, volatileCoins } from "@libs/tokens";
 import { Grid, useMediaQuery } from "@mui/material";
 import PageTitle from "components/PageTitle";
 import { TitleContainer } from "components/PageTitle/style";
@@ -34,6 +35,18 @@ export default function MyPage({ className }: MypageProps) {
     const [tab, setTab] = useState<Item>(() => tabItems[0]);
     const connected = true;
 
+    const coins = useMemo(() => {
+        switch (tab.value) {
+            case "all":
+                return allCoins;
+            case "stable":
+                return stableCoins;
+            case "volatile":
+                return volatileCoins;
+            default:
+                return allCoins;
+        }
+    }, [tab]);
 
     return (
         <Container className={className}>
@@ -56,85 +69,27 @@ export default function MyPage({ className }: MypageProps) {
                 />
             )}
 
-            <Grid container rowSpacing={4} columnSpacing={7} style={{ paddingTop: "20px" }}>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="usdc"
-                        tokenName="USD Coin"
-                        saveBalance=""
-                        saveUSDBalance="$937,345.00"
-                        apy="14,87%"
-                    />
-                </Grid>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="wbtc"
-                        tokenName="Wrapped Bitcoin"
-                        saveBalance=""
-                        saveUSDBalance="$88,381.28 USD Value"
-                        apy="9,87%"
-                    />
-                </Grid>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="usdt"
-                        tokenName="USD Tether"
-                        saveBalance=""
-                        saveUSDBalance="$37,345.89"
-                        apy="14,87%"
-                    />
-                </Grid>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="eth"
-                        tokenName="Ethereum"
-                        saveBalance=""
-                        saveUSDBalance="$43,455.81 USD Value"
-                        apy="9,87%"
-                    />
-                </Grid>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="dai"
-                        tokenName="Dai"
-                        saveBalance=""
-                        saveUSDBalance="$937,345.79"
-                        apy="14,87%"
-                    />
-                </Grid>
-                <Grid
-                    item
-                    md={6}
-                    style={{ paddingTop: "12px", paddingBottom: "12px" }}
-                >
-                    <DepositCard
-                        token="wnear"
-                        tokenName="Wrapped Near"
-                        saveBalance=""
-                        saveUSDBalance="$107,289.97USD Value"
-                        apy="9,87%"
-                    />
-                </Grid>
+            <Grid
+                container
+                rowSpacing={4}
+                columnSpacing={7}
+                style={{ paddingTop: "20px" }}
+            >
+                {coins.map((item: Coin, key: number) => (
+                    <Grid
+                        item
+                        key={key}
+                        md={6}
+                        style={{ paddingTop: "12px", paddingBottom: "12px" }}
+                    >
+                        <DepositCard
+                            token={item}
+                            saveBalance=""
+                            saveUSDBalance="$937,345.00"
+                            apy="14,87%"
+                        />
+                    </Grid>
+                ))}
             </Grid>
 
             {(isSmallLayout || tab.value === "all") && connected && (

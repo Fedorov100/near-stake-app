@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import React from "react";
 import type { DialogProps, OpenDialog } from "@libs/use-dialog";
 import { useDialog } from "@libs/use-dialog";
 import { FormParams, FormReturn } from "./useDepositDialog";

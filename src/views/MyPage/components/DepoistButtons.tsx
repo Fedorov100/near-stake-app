@@ -1,5 +1,6 @@
 import { ActionButton } from "@libs/components/ActionButton";
 import { BorderButton } from "@libs/components/BorderButton";
+import { Coin } from "@libs/tokens";
 import { Box } from "@mui/material";
 import { useDepositDialog } from "components/Dialog/useDepositDialog";
 import { useWithdrawDialog } from "components/Dialog/useWithdrawDialog";
@@ -8,13 +9,17 @@ import { useWallet } from "contexts/accounts";
 import { WalletConnection } from "near-api-js";
 import { useCallback } from "react";
 
-export default function DepositButtons() {
+interface DepositButtonProps {
+    coin: Coin;
+}
+
+export default function DepositButtons(props: DepositButtonProps) {
+    const { coin } = props;
     const wallet: WalletConnection = useWallet();
     const connected = wallet.isSignedIn();
 
-    const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
-    const [openWithdrawDialog, withdrawDialogElement] =
-        useWithdrawDialog("USDT");
+    const [openDepositDialog, depositDialogElement] = useDepositDialog(coin);
+    const [openWithdrawDialog, withdrawDialogElement] = useWithdrawDialog(coin);
     const [openWalletConnectDialog, walletConnectDialogElement] =
         useConnectWalletDialog();
 

@@ -1,6 +1,6 @@
 import { tokenImages } from '@libs/token-icons';
 
-export const symbols = [
+export const coins = [
     'usdc',
     'usdt',
     'dai',
@@ -9,14 +9,28 @@ export const symbols = [
     'eth',
     'wnear',
 ] as const;
+
+export const stableCoins = [
+    'usdc',
+    'usdt',
+    'usn',
+] as const;
+
+export const volatileCoins = [
+    'dai',
+    'wbtc',
+    'eth',
+    'wnear',
+] as const;
+
 export const variants = ['id', 'symbol', 'name', 'img', 'description'] as const;
 
-export type Symbols = typeof symbols[number];
+export type Coin = typeof coins[number];
 export type TokenVariant = typeof variants[number];
 
 export type TokenImage = { src: string };
 
-export const tokens: Record<Symbols, Record<TokenVariant, string | TokenImage>> = {
+export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
     usdc: {
         'id': "usdc",
         'symbol': "usdc",
@@ -68,6 +82,6 @@ export const tokens: Record<Symbols, Record<TokenVariant, string | TokenImage>> 
     },
 };
 
-export function getCoinDetail(coin: Symbols): Record<TokenVariant, string | TokenImage> {
+export function getCoinDetail(coin: Coin): Record<TokenVariant, string | TokenImage> {
     return tokens[coin];
 }

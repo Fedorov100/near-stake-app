@@ -18,6 +18,7 @@ import { ActionButton } from "@libs/components/ActionButton";
 import { BorderButton } from "@libs/components/BorderButton";
 import * as BaseStyled from "views/Dashboard/style";
 import { TokenIcon } from "@libs/token-icons";
+import { getCoinDetail, Coin } from "@libs/tokens";
 
 export function NearWithdrawDialog2(props: any) {
     const [open, setOpen] = React.useState(true);
@@ -137,10 +138,12 @@ export function NearWithdrawDialog2(props: any) {
     );
 }
 
-export function NearWithdrawDialog(props: DialogProps<{}, void>) {
-    const [coin, setCoin] = useState(props.coin);
-    const [continued, setContinued] = React.useState(false);
-    const [withdrawAmount, setWithdrawAmount] = useState(0);
+export function NearWithdrawDialog(props: DialogProps<{}, void> | any) {
+    const [coin, setCoin] = useState<Coin>(props.coin);
+    const [continued, setContinued] = React.useState<boolean>(false);
+    const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
+
+    const tokenDetail = getCoinDetail(coin);
 
     return (
         <>
@@ -179,7 +182,7 @@ export function NearWithdrawDialog(props: DialogProps<{}, void>) {
                     >
                         <BaseStyled.CNContainer>
                             <TokenIcon
-                                token={"usdt"}
+                                token={coin}
                                 style={{
                                     width: "33px",
                                     height: "33px",
@@ -194,10 +197,10 @@ export function NearWithdrawDialog(props: DialogProps<{}, void>) {
                                 }}
                             >
                                 <BaseStyled.TokenName>
-                                    {"USDT"}
+                                    {tokenDetail.name}
                                 </BaseStyled.TokenName>
                                 <BaseStyled.TokenDes>
-                                    {"USD Tether"}
+                                    {tokenDetail.description}
                                 </BaseStyled.TokenDes>
                             </Box>
                         </BaseStyled.CNContainer>
@@ -206,7 +209,7 @@ export function NearWithdrawDialog(props: DialogProps<{}, void>) {
             </WithdrawDialog>
             {continued && (
                 <NearWarning
-                    proceed={() => { }}
+                    proceed={() => {}}
                     className={"warning-box"}
                     coin={coin}
                 />
