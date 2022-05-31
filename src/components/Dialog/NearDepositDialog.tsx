@@ -10,6 +10,7 @@ export function NearDepositDialog(props: DialogProps<{}, void>) {
     const [coin, setCoin] = React.useState(props.coin);
     const [openConfirm, confirmElement] = useConfirm();
     const [active, setActive] = useState(false);
+    const [depositAmount, setDepositAmount] = useState(0);
 
     function calcTime(offset: number) {
         let d = new Date();
@@ -43,7 +44,8 @@ export function NearDepositDialog(props: DialogProps<{}, void>) {
             setCoin={setCoin}
             coin={coin}
             setToggled={setToggled}
-            depositAmount={0}
+            depositAmount={depositAmount}
+            updateDepositAmount={setDepositAmount}
             maxAmount={245346}
         >
             <>

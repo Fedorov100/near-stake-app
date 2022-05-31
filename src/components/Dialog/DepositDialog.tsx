@@ -17,6 +17,7 @@ function DepositDialogBase(props: any) {
         children,
         closeDialog,
         depositAmount,
+        withdrawAmout,
         txFee,
         sendAmount,
         maxAmount,
@@ -83,6 +84,7 @@ function DepositDialogBase(props: any) {
                 <NumberInput
                     className="amount"
                     value={depositAmount}
+                    // value={200}
                     maxIntegerPoinsts={14}
                     maxDecimalPoints={3}
                     label="AMOUNT"
@@ -119,7 +121,7 @@ function DepositDialogBase(props: any) {
                         max={Number(maxAmount)}
                         txFee={Number(txFee ?? "0")}
                         value={Number(depositAmount)}
-                        onChange={() => {}}
+                        onChange={(value) => { updateDepositAmount(value.toFixed(2)) }}
                     />
                 </figure>
 
