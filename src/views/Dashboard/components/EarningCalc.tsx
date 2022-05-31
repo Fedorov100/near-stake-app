@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { useTheme } from "styled-components";
 import { CoolInput, StyledSection } from "../style";
 import { NewChartCalc, numberWithCommas } from "./ANCPriceChart";
+import { Coin, coins, getCoinDetail } from "@libs/tokens";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -72,12 +73,13 @@ export const EarningCalc = (props: any) => {
         const [open, setOpen] = React.useState(false);
 
         const handleChange = (event: any) => {
-            if (event.target.value === 0.000955342) {
-                setChoice([event.target.value, "UST"]);
-            }
-            if (event.target.value === 0.000509863) {
-                setChoice([event.target.value, "LUNA"]);
-            }
+            setChoice([event.target.value, "NEAR"]);
+            // if (event.target.value === 0.000955342) {
+            //     setChoice([event.target.value, "UST"]);
+            // }
+            // if (event.target.value === 0.000509863) {
+            //     setChoice([event.target.value, "LUNA"]);
+            // }
         };
 
         const handleClose = () => {
@@ -109,7 +111,18 @@ export const EarningCalc = (props: any) => {
                         style={{ fontSize: "20px" }}
                         variant="standard"
                     >
-                        <MenuItem value={0.000509863}>USDC</MenuItem>
+                        {coins.map((item: Coin, key: number) => {
+                            let tokenDetail = getCoinDetail(item);
+                            if (!tokenDetail.publish) return null;
+                            return (
+                                <MenuItem
+                                    key={key}
+                                    value={0.000509863 + key * 0.000121}
+                                >
+                                    {tokenDetail.name}
+                                </MenuItem>
+                            );
+                        })}
                         <MenuItem value={0.000955342}>OTHER ASSEST</MenuItem>
                     </Select>
                 </FormControl>
@@ -166,7 +179,10 @@ export const EarningCalc = (props: any) => {
             <div className="NeuSection-content2">
                 <div className="input-formatter">
                     <div className="fields-input">
-                        <div className="fields-deposit" style={{ marginTop: "61px" }}>
+                        <div
+                            className="fields-deposit"
+                            style={{ marginTop: "61px" }}
+                        >
                             <ControlledOpenSelect
                                 choice={choice}
                                 setChoice={setChoice}
@@ -300,6 +316,6 @@ export const EarningCalc = (props: any) => {
                     </div>
                 </div>
             </div>
-        </StyledSection >
+        </StyledSection>
     );
 };

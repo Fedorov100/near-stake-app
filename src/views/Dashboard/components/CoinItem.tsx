@@ -30,6 +30,10 @@ export default function CoinItem(props: CoinItemProps) {
         await openWithdrawDialog();
     }, [openWithdrawDialog]);
 
+    if (!tokenDetail.publish) {
+        return null;
+    }
+
     return (
         <React.Fragment>
             <Styled.TR>

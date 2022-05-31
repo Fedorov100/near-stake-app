@@ -37,6 +37,7 @@ import usn from "./assets/usn.svg";
 import wbtc from "./assets/btc.svg";
 import eth from "./assets/eth.svg";
 import wnear from "./assets/wnear.svg";
+import neart from "./assets/neart.svg";
 
 export { anc80gif, anc160gif };
 
@@ -55,6 +56,7 @@ export const tokens = [
     "wbtc",
     "eth",
     "wnear",
+    "neart",
 ] as const;
 export const variants = ["svg", "@2x", "@3x", "@4x"] as const;
 
@@ -153,6 +155,12 @@ export const tokenImages: Record<Tokens, Record<IconVariant, TokenImage>> = {
         "@2x": convert(wnear),
         "@3x": convert(wnear),
         "@4x": convert(wnear)
+    },
+    neart: {
+        svg: convert(neart),
+        "@2x": convert(neart),
+        "@3x": convert(neart),
+        "@4x": convert(neart)
     },
 };
 

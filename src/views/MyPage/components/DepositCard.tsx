@@ -8,6 +8,7 @@ import { InfoTooltip } from "components/InfoTooltip";
 import DepositButtons from "./DepoistButtons";
 import styled from "styled-components";
 import { Coin, getCoinDetail } from "@libs/tokens";
+import { BorderButton } from "@libs/components/BorderButton";
 
 export interface TokenCardProps {
     token: Coin;
@@ -26,7 +27,7 @@ export default function DepositCard({
     return (
         <>
             <Section
-                className="NeuSection-root deposit2"
+                className="NeuSection-root"
                 style={{ margin: 0, height: "252px", marginBottom: "5px" }}
             >
                 <SectionContent>
@@ -66,6 +67,8 @@ export default function DepositCard({
                                         </BaseStyled.TokenName>
                                         <BaseStyled.TokenDes>
                                             {tokenDetail.description}
+                                            {!tokenDetail.publish &&
+                                                " (Comming Soon)"}
                                         </BaseStyled.TokenDes>
                                     </Box>
                                 </BaseStyled.CNContainer>
@@ -129,7 +132,13 @@ export default function DepositCard({
                             </Grid>
                         </Grid>
                         <StyledDepositButtons>
-                            <DepositButtons coin={token} />
+                            {tokenDetail.publish ? (
+                                <DepositButtons coin={token} />
+                            ) : (
+                                <BorderButton style={{ width: "424px" }}>
+                                    Comming Soon
+                                </BorderButton>
+                            )}
                         </StyledDepositButtons>
                     </div>
                 </SectionContent>

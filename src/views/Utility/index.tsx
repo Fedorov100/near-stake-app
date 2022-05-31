@@ -93,7 +93,7 @@ export default function Utility({ className }: BorrowProps) {
                                 <span className={"denom"}>USD</span>
                             </div>
                             <StakeButton
-                                coin={"uluna"}
+                                coin={"usdt"}
                                 coinName={"NOW & GET FREE NEAR"}
                             />
                         </section>
@@ -247,7 +247,7 @@ export default function Utility({ className }: BorrowProps) {
                                 </InfoTooltip>
                             </div>
                             <StakeButton
-                                coin={"uluna"}
+                                coin={"usdt"}
                                 coinName={"NOW & GET FREE NearT"}
                             />
                         </Grid>

@@ -6,7 +6,10 @@ import styled from "styled-components";
 import { Near, Sender } from "@libs/icons";
 import { useWallet } from "contexts/accounts";
 import { WalletConnection } from "near-api-js";
-import { useConnectWaitingDialog } from "./useConnectWalletDialog";
+import {
+    useConnectFailedDialog,
+    useConnectWaitingDialog,
+} from "./useConnectWalletDialog";
 
 interface ConnectWalletDialogProps extends UIElementProps {
     closeDialog: (returnValue: void) => void;
@@ -16,9 +19,17 @@ export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
     const wallet: WalletConnection = useWallet();
     const [openConnectWaitingDialog, walletConnectWaitingDialogElement] =
         useConnectWaitingDialog();
+    const [openConnectFailedDialog, walletConnectFailedDialogElement] =
+        useConnectFailedDialog();
 
     const connectWaiting = async () => {
         await openConnectWaitingDialog();
+        props.closeDialog()
+    };
+
+    const connectFailed = async () => {
+        await openConnectFailedDialog();
+        props.closeDialog()
     };
 
     const connectNearWallet = async () => {
@@ -30,10 +41,14 @@ export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
         connectWaiting();
         const contractId = "guest-book.testnet";
         const methodNames = ["addMessage"];
-        // const res = await window.near.requestSignIn({
-        //     contractId,
-        //     methodNames,
-        // });
+        const mywindow: any = window;
+        const res = await mywindow.near.requestSignIn({
+            contractId,
+            methodNames,
+        });
+        if (res.error) {
+            connectFailed();
+        }
     };
 
     return (
@@ -76,6 +91,7 @@ export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
                 </Dialog>
             </Modal>
             {walletConnectWaitingDialogElement}
+            {walletConnectFailedDialogElement}
         </React.Fragment>
     );
 }

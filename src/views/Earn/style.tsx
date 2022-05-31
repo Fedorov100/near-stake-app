@@ -20,23 +20,13 @@ export const Container = styled(PaddedLayout)`
     hr {
         margin: 20px 0;
     }
-    Button {
-        border: none;
-    }
+
     ul li {
         div {
             border: none;
         }
     }
     .deposit1 {
-        Button {
-            height: 45px;
-            width: 200px;
-            margin: 10px;
-            border: none;
-        }
-    }
-    .deposit2 {
         Button {
             height: 45px;
             width: 200px;

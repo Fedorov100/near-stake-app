@@ -18,7 +18,10 @@ export interface TotalDepositSectionProps {
     style?: any;
 }
 
-export function TotalDepositSection({ className, coin }: TotalDepositSectionProps) {
+export function TotalDepositSection({
+    className,
+    coin,
+}: TotalDepositSectionProps) {
     // ---------------------------------------------
     // presentation
     // ---------------------------------------------
@@ -59,15 +62,25 @@ export function DepositButtonsTD({
     className,
     coin,
 }: TotalDepositSectionProps) {
+    const wallet: WalletConnection = useWallet();
+    const connected = wallet.isSignedIn();
+
     const [openDepositDialog, depositDialogElement] = useDepositDialog(coin);
-    const [openWithdrawDialog, withdrawDialogElement] =
-        useWithdrawDialog(coin);
+    const [openWithdrawDialog, withdrawDialogElement] = useWithdrawDialog(coin);
+    const [openWalletConnectDialog, walletConnectDialogElement] =
+        useConnectWalletDialog();
+
+    const openConnectWallet = useCallback(async () => {
+        await openWalletConnectDialog();
+    }, [openWalletConnectDialog]);
 
     const openDeposit = useCallback(async () => {
+        if (!connected) return openConnectWallet();
         await openDepositDialog();
     }, [openDepositDialog]);
 
     const openWithdraw = useCallback(async () => {
+        if (!connected) return openConnectWallet();
         await openWithdrawDialog();
     }, [openWithdrawDialog]);
     // ---------------------------------------------
@@ -92,7 +105,7 @@ export function DepositButtonsTD({
                     }}
                     onClick={openDeposit}
                 >
-                    Deposit
+                    {connected ? `Deposit` : `Connect Wallet`}
                 </ActionButton>
                 <BorderButton
                     className="sizeButton border"
@@ -103,11 +116,12 @@ export function DepositButtonsTD({
                     }}
                     onClick={openWithdraw}
                 >
-                    Withdraw
+                    {connected ? `Withdraw` : `Connect Wallet`}
                 </BorderButton>
             </div>
             {depositDialogElement}
             {withdrawDialogElement}
+            {walletConnectDialogElement}
         </div>
     );
 }
@@ -172,7 +186,7 @@ export function StakeButton({
     const wallet: WalletConnection = useWallet();
     const connected = wallet.isSignedIn();
 
-    const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
+    const [openDepositDialog, depositDialogElement] = useDepositDialog(coin);
     const [openWalletConnectDialog, walletConnectDialogElement] =
         useConnectWalletDialog();
 
@@ -202,8 +216,12 @@ export function StakeButton({
     // ---------------------------------------------
     return (
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
-            <ActionButton className="sizeButton" style={stakeStyles} onClick={openDeposit}>
-                {connected ? `Deposit ${coinName}` : `Connect Account`}
+            <ActionButton
+                className="sizeButton"
+                style={stakeStyles}
+                onClick={openDeposit}
+            >
+                {connected ? `Deposit ${coinName}` : `Connect Wallet`}
             </ActionButton>
             {depositDialogElement}
             {walletConnectDialogElement}
