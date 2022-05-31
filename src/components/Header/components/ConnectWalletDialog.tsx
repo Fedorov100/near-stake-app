@@ -26,6 +26,16 @@ export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
         wallet.requestSignIn();
     };
 
+    const connectSenderWallet = async () => {
+        connectWaiting();
+        const contractId = "guest-book.testnet";
+        const methodNames = ["addMessage"];
+        // const res = await window.near.requestSignIn({
+        //     contractId,
+        //     methodNames,
+        // });
+    };
+
     return (
         <React.Fragment>
             <Modal open onClose={() => props.closeDialog()}>
@@ -46,14 +56,17 @@ export default function ConnectWalletDialog(props: ConnectWalletDialogProps) {
                             <Grid item xs={6}>
                                 <Box
                                     className="wallet-item"
-                                    onClick={() => connectNearWallet()}
+                                    onClick={connectNearWallet}
                                 >
                                     <Near viewBox="0 0 49 49" />
                                     <WalletName>Near Wallet</WalletName>
                                 </Box>
                             </Grid>
                             <Grid item xs={6}>
-                                <Box className="wallet-item">
+                                <Box
+                                    className="wallet-item"
+                                    onClick={connectSenderWallet}
+                                >
                                     <Sender viewBox="0 0 49 49" />
                                     <WalletName>Sender</WalletName>
                                 </Box>

@@ -18,7 +18,7 @@ export default function Earn({ className }: EarnProps) {
                 <PageTitle title="EARN" />
             </FlexTitleContainer>
             <section>
-                <TotalDepositSection className="total-deposit NeuSection-root" />
+                <TotalDepositSection coin="usdt" className="total-deposit NeuSection-root" />
                 <Grid
                     container
                     rowSpacing={4}
