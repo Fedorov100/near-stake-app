@@ -29,9 +29,26 @@ export default function PageTitle({
                 )}
             </IconSpan>
             {docs && (
-                <a href={docs} target="anchor-docs" rel="noreferrer">
+                <a
+                    href={docs}
+                    target="anchor-docs"
+                    rel="noreferrer"
+                    style={{
+                        color: "#CEC0C0",
+                        fontSize: "13px",
+                        fontWeight: 860,
+                        display: "inline-flex",
+                        alignItems: "center",
+                    }}
+                >
                     Docs
-                    <Launch />
+                    <Launch
+                        fill="#CEC0C0"
+                        style={{
+                            marginLeft: "5px",
+                            width: "10px",
+                        }}
+                    />
                 </a>
             )}
         </Styled.Container>

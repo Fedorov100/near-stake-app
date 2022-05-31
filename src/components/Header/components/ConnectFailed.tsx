@@ -6,12 +6,11 @@ import { ActionButton } from "@libs/components/ActionButton";
 
 interface ConnectWalletDialogProps extends UIElementProps {
     closeDialog: (returnValue: void) => void;
-    open: boolean;
 }
 
 export default function ConnectFailed(props: ConnectWalletDialogProps) {
     return (
-        <Modal open={props.open} onClose={() => props.closeDialog()}>
+        <Modal open onClose={() => props.closeDialog()}>
             <Dialog onClose={() => props.closeDialog()}>
                 <Box className="content">
                     <h2 className="close-icon">❌</h2>

@@ -7,6 +7,9 @@ import { InfoTooltip } from "components/InfoTooltip";
 import { useDepositDialog } from "components/Dialog/useDepositDialog";
 import { useWithdrawDialog } from "components/Dialog/useWithdrawDialog";
 import { useCallback } from "react";
+import { WalletConnection } from "near-api-js";
+import { useWallet } from "contexts/accounts";
+import { useConnectWalletDialog } from "components/Header/components/useConnectWalletDialog";
 
 export interface TotalDepositSectionProps {
     className?: string;
@@ -165,6 +168,21 @@ export function StakeButton({
     coin,
     coinName,
 }: TotalDepositSectionProps) {
+    const wallet: WalletConnection = useWallet();
+    const connected = wallet.isSignedIn();
+
+    const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
+    const [openWalletConnectDialog, walletConnectDialogElement] =
+        useConnectWalletDialog();
+
+    const openConnectWallet = useCallback(async () => {
+        await openWalletConnectDialog();
+    }, [openWalletConnectDialog]);
+
+    const openDeposit = useCallback(async () => {
+        if (!connected) return openConnectWallet();
+        await openDepositDialog();
+    }, [openDepositDialog]);
     // ---------------------------------------------
     // dependencies
     // ---------------------------------------------
@@ -183,9 +201,11 @@ export function StakeButton({
     // ---------------------------------------------
     return (
         <div style={{ display: "flex", justifyContent: "flex-start" }}>
-            <ActionButton className="sizeButton" style={stakeStyles}>
-                Deposit {coinName}
+            <ActionButton className="sizeButton" style={stakeStyles} onClick={openDeposit}>
+                {connected ? `Deposit ${coinName}` : `Connect Account`}
             </ActionButton>
+            {depositDialogElement}
+            {walletConnectDialogElement}
         </div>
     );
 }

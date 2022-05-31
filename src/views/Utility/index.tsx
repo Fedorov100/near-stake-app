@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button, Grid, Box } from "@mui/material";
 import { SyncAlt } from "@mui/icons-material";
 import {
@@ -14,6 +14,7 @@ import { StakeButton } from "views/Earn/components/TotalDepositSection";
 import { ActionButton } from "@libs/components/ActionButton";
 import { FlexTitleContainer } from "components/PageTitle/style";
 import PageTitle from "components/PageTitle";
+import { InfoTooltip } from "components/InfoTooltip";
 
 export interface BorrowProps {
     className?: string;
@@ -51,7 +52,7 @@ export default function Utility({ className }: BorrowProps) {
     return (
         <Container className={className}>
             <FlexTitleContainer>
-                <PageTitle title="Utility+" />
+                <PageTitle title="UTILITY + " />
             </FlexTitleContainer>
             <>
                 <h2
@@ -71,7 +72,19 @@ export default function Utility({ className }: BorrowProps) {
                                 width: "50%",
                             }}
                         >
-                            <div className={"head1"}>CURRENT NearT PRICE </div>
+                            <div className={"head1"}>
+                                CURRENT NearT PRICE
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "18px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    CURRENT NearT PRICE
+                                </InfoTooltip>
+                            </div>
                             <div
                                 className={"adorn"}
                                 style={{ marginBottom: "40px" }}
@@ -89,9 +102,22 @@ export default function Utility({ className }: BorrowProps) {
                                 display: "inline-block",
                                 width: "50%",
                                 verticalAlign: "top",
+                                color: "#CEBFBF",
                             }}
                         >
-                            <div className={"head1"}>PROJECTED NearT PRICE</div>
+                            <div className={"head1"}>
+                                PROJECTED NearT PRICE
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "18px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    PROJECTED NearT PRICE
+                                </InfoTooltip>
+                            </div>
                             <div className={"adorn"}>
                                 <div className={"numbers"}>1.25</div>
                                 <span className={"denom"}>USD</span>
@@ -106,7 +132,19 @@ export default function Utility({ className }: BorrowProps) {
                             width: "50%",
                         }}
                     >
-                        <div className={"head1"}>YOUR FARMED NearT TOKENS</div>
+                        <div className={"head1"}>
+                            YOUR FARMED NearT TOKENS
+                            <InfoTooltip
+                                style={{
+                                    color: "white",
+                                    opacity: "1",
+                                    height: "18px",
+                                    width: "18px",
+                                }}
+                            >
+                                YOUR FARMED NearT TOKENS
+                            </InfoTooltip>
+                        </div>
                         <div className={"adorn"}>
                             <div className={"numbers"}>52,875.97</div>
                             <span className={"denom"}>NearT</span>
@@ -116,10 +154,21 @@ export default function Utility({ className }: BorrowProps) {
                         style={{
                             display: "inline-block",
                             width: "50%",
+                            color: "#CEBFBF",
                         }}
                     >
                         <div className={"head1"}>
                             YOUR PROJECTED SHARE OF NearT TOKENS
+                            <InfoTooltip
+                                style={{
+                                    color: "white",
+                                    opacity: "1",
+                                    height: "18px",
+                                    width: "18px",
+                                }}
+                            >
+                                YOUR PROJECTED SHARE OF NearT TOKENS
+                            </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
                             <div className={"numbers"}>1,152,875.97</div>
@@ -136,6 +185,16 @@ export default function Utility({ className }: BorrowProps) {
                     >
                         <div className={"head1"}>
                             YOUR CURRENT ALLOCATION VALUE
+                            <InfoTooltip
+                                style={{
+                                    color: "white",
+                                    opacity: "1",
+                                    height: "18px",
+                                    width: "18px",
+                                }}
+                            >
+                                YOUR CURRENT ALLOCATION VALUE
+                            </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
                             <div className={"numbers"}>$10,355</div>
@@ -146,10 +205,21 @@ export default function Utility({ className }: BorrowProps) {
                         style={{
                             display: "inline-block",
                             width: "50%",
+                            color: "#CEBFBF",
                         }}
                     >
                         <div className={"head1"}>
                             YOUR PROJECTED ALLOCATION VALUE
+                            <InfoTooltip
+                                style={{
+                                    color: "white",
+                                    opacity: "1",
+                                    height: "18px",
+                                    width: "18px",
+                                }}
+                            >
+                                YOUR PROJECTED ALLOCATION VALUE
+                            </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
                             <div className={"numbers"}>$122,875</div>
@@ -165,6 +235,16 @@ export default function Utility({ className }: BorrowProps) {
                                 style={{ marginBottom: "50px" }}
                             >
                                 HOW MUCH NearT CAN I EARN?
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "18px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    HOW MUCH NearT CAN I EARN?
+                                </InfoTooltip>
                             </div>
                             <StakeButton
                                 coin={"uluna"}
@@ -247,18 +327,42 @@ export default function Utility({ className }: BorrowProps) {
                 </h2>
                 <StyledSection
                     className={"bottom-sec"}
-                    style={{ marginTop: "20px", width: "1220px", height: "389px" }}
+                    style={{
+                        marginTop: "20px",
+                        width: "1220px",
+                        height: "389px",
+                    }}
                 >
                     <Grid container>
                         <Grid item md={6}>
                             <div className={"head1"}>
                                 NEAR TREASURY REWARDS PLUS PROGRAM
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "18px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    NEAR TREASURY REWARDS PLUS PROGRAM
+                                </InfoTooltip>
                             </div>
                             <div
                                 className={"head1"}
                                 style={{ marginTop: "80px" }}
                             >
                                 YOUR QUALIFIED DEPOSIT VALUE
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "18px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    YOUR QUALIFIED DEPOSIT VALUE
+                                </InfoTooltip>
                             </div>
                             <div className={"adorn"}>
                                 <div className={"numbers"}>532,875</div>
@@ -268,7 +372,7 @@ export default function Utility({ className }: BorrowProps) {
                                 className="claim"
                                 style={{
                                     width: "357px",
-                                    marginTop: "45px",
+                                    marginTop: "40px",
                                 }}
                             >
                                 SAVE NOW
@@ -277,6 +381,16 @@ export default function Utility({ className }: BorrowProps) {
                         <Grid item md={6} style={{ paddingLeft: "60px" }}>
                             <div className={"head1"}>
                                 QUALIFYING PHASE STATUS
+                                <InfoTooltip
+                                    style={{
+                                        color: "white",
+                                        opacity: "1",
+                                        height: "21px",
+                                        width: "18px",
+                                    }}
+                                >
+                                    QUALIFYING PHASE STATUS
+                                </InfoTooltip>
                             </div>
                             <Button
                                 variant="contained"
@@ -298,25 +412,45 @@ export default function Utility({ className }: BorrowProps) {
                             <InSection
                                 className={"NeuSection-root bottom-desc"}
                             >
-                                <div className="NeuSection-content" style={{ padding: "20px 0px" }}>
-                                    <div>
-                                        <div style={{ paddingTop: "30px" }}>
-                                            IF THE BUTTON IS GREEN, THIS MEANS EVERY
-                                            DEPOSIT DURING THIS PERIOD QUALIFIES YOU
-                                            FOR THE MONTHLY REWARDS+ PROGRAM.
-                                        </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        height: "100%",
+                                    }}
+                                >
+                                    <InfoTooltip
+                                        style={{
+                                            color: "white",
+                                            opacity: "1",
+                                            height: "18px",
+                                            width: "18px",
+                                            margin: "0 17px 0 22px",
+                                        }}
+                                    >
+                                        IF THE BUTTON IS GREEN, THIS MEANS EVERY
+                                        DEPOSIT DURING THIS PERIOD QUALIFIES YOU
+                                        FOR THE MONTHLY REWARDS+ PROGRAM.
+                                    </InfoTooltip>
+                                    <div className="description">
+                                        <p>
+                                            IF THE BUTTON IS GREEN, THIS MEANS
+                                            EVERY DEPOSIT DURING THIS PERIOD
+                                            QUALIFIES YOU FOR THE MONTHLY
+                                            REWARDS+ PROGRAM.
+                                        </p>
                                         <br></br>
-                                        <div>
+                                        <p>
                                             IF THE BUTTON IS RED, THIS MEANS YOU
-                                            NEED TO KEEP YOUR BALANCE DEPOSITED TO
-                                            BECOME ELIGIBLE FOR THE NEXT QUALIFIYNG
-                                            PHASE.
-                                        </div>
+                                            NEED TO KEEP YOUR BALANCE DEPOSITED
+                                            TO BECOME ELIGIBLE FOR THE NEXT
+                                            QUALIFIYNG PHASE.
+                                        </p>
                                         <br />
-                                        <div style={{ paddingBottom: "30px" }}>
-                                            ALL PAYOUTS OF THE REWARDS+ PROGRAM ARE
-                                            AUTOMATED.
-                                        </div>
+                                        <p>
+                                            ALL PAYOUTS OF THE REWARDS+ PROGRAM
+                                            ARE AUTOMATED.
+                                        </p>
                                     </div>
                                 </div>
                             </InSection>

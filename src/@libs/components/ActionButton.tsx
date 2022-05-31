@@ -14,7 +14,6 @@ export const buttonBaseStyle = css`
     user-select: none;
 
     font-size: 14px;
-    font-weight: 500;
     text-align: center;
     color: ${({ theme }) => theme.actionButton.textColor};
 `;
@@ -28,6 +27,7 @@ export const ActionButton = styled(ButtonBase).attrs({ disableRipple: true })`
     ${buttonBaseStyle};
 
     background-color: ${({ theme }) => theme.actionButton.backgroundColor};
+    font-weight: 800;
 
     &:hover {
         background-color: ${({ theme }) =>

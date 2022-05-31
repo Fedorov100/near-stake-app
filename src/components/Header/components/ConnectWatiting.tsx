@@ -6,12 +6,11 @@ import { Near } from "@libs/icons";
 
 interface ConnectWalletDialogProps extends UIElementProps {
     closeDialog: (returnValue: void) => void;
-    open: boolean;
 }
 
 export default function ConnectWatiting(props: ConnectWalletDialogProps) {
     return (
-        <Modal open={props.open} onClose={() => props.closeDialog()}>
+        <Modal open onClose={() => props.closeDialog()}>
             <Dialog onClose={() => props.closeDialog()}>
                 <Box className="content">
                     <Near viewBox="0 0 49 49" />

@@ -10,7 +10,7 @@ import { IconSpan } from "@libs/components/IconSpan";
 import { Dialog } from "@libs/components/Dialog";
 import { NumberInput } from "@libs/components/NumberInput";
 import { UpdateBalanceButton } from "views/Earn/components/TotalDepositSection";
-import { SliderValueLabelUnstyled } from "@mui/base";
+import { getCoinDetail } from "@libs/tokens";
 
 function WithdrawDialogBase(props: any) {
     const {
@@ -37,6 +37,8 @@ function WithdrawDialogBase(props: any) {
         };
     }, []);
 
+    const tokenDetail = getCoinDetail(coin);
+
     return (
         <Modal open onClose={() => closeDialog()}>
             <Dialog className={className} onClose={() => closeDialog()}>
@@ -56,7 +58,7 @@ function WithdrawDialogBase(props: any) {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                {"USDT"}
+                                {tokenDetail.name}
                             </InputAdornment>
                         ),
                     }}
@@ -73,7 +75,7 @@ function WithdrawDialogBase(props: any) {
                             onClick={() => { }}
                         >
                             {Number(totalDeposit.div(100))}
-                            {` ${"USDT"}`}
+                            {` ${tokenDetail.name}`}
                         </span>
                     </span>
                 </div>
@@ -98,18 +100,18 @@ function WithdrawDialogBase(props: any) {
                         {coin === "uusd" && (
                             <TxFeeListItem label={<IconSpan>Tx Fee</IconSpan>}>
                                 {txFee ? txFee : "0"}
-                                {` ${"USDT"}`}
+                                {` ${tokenDetail.name}`}
                             </TxFeeListItem>
                         )}
                         {coin === "uluna" && (
                             <TxFeeListItem label={<IconSpan>Tx Fee</IconSpan>}>
                                 {txFee ? 11500 : "0"}
-                                {` ${"USDT"}`}
+                                {` ${tokenDetail.name}`}
                             </TxFeeListItem>
                         )}
                         <TxFeeListItem label="Receive Amount">
                             {receiveAmount ? receiveAmount : "0"}
-                            {` ${"USDT"}`}
+                            {` ${tokenDetail.name}`}
                         </TxFeeListItem>
                     </TxFeeList>
                 }

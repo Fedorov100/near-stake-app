@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { ButtonList } from "./components/ConnectButton";
-import ConnectWalletDialog from "./components/ConnectWalletDialog";
+import { useConnectWalletDialog } from "./components/useConnectWalletDialog";
 import { Container } from "./style";
 
 export interface DesktopHeaderProps {
@@ -23,8 +23,9 @@ export default function Header({ className }: DesktopHeaderProps) {
     const menus = useMenus();
     const wallet: WalletConnection = useWallet();
 
-    const [openWalletDialog, setOpenWalletDialog] = useState<boolean>(false);
-    const [waitingConnect, setWaitingConnect] = useState<boolean>(false);
+    const [openWalletConnectDialog, walletConnectDialogElement] =
+        useConnectWalletDialog();
+
     const [account, setAccount] = useState<Account>({
         connected: false,
         walletAddress: "",
@@ -43,13 +44,13 @@ export default function Header({ className }: DesktopHeaderProps) {
         });
     };
 
+    const connectNearWallet = async () => {
+        await openWalletConnectDialog();
+    };
+
     useEffect(() => {
         getAccountDetail();
     }, []);
-
-    useEffect(() => {
-        if (!openWalletDialog) setWaitingConnect(false);
-    }, [openWalletDialog]);
 
     return (
         <Container style={{ marginTop: "14px" }}>
@@ -65,18 +66,12 @@ export default function Header({ className }: DesktopHeaderProps) {
                         {...account}
                         className="connect"
                         title="Connect Wallet"
-                        onClick={() => setOpenWalletDialog(!openWalletDialog)}
+                        onClick={connectNearWallet}
                     ></ButtonList>
                 </section>
 
                 <GlobalStyle />
-                <ConnectWalletDialog
-                    open={openWalletDialog}
-                    closeDialog={() => setOpenWalletDialog(false)}
-                    isWaiting={waitingConnect}
-                    isFailed={false}
-                    setWaiting={setWaitingConnect}
-                />
+                {walletConnectDialogElement}
             </div>
         </Container>
     );

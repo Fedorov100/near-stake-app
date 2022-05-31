@@ -1,36 +1,48 @@
 import { useCallback } from "react";
 import * as Styled from "../style";
 
-import { TokenIcon } from "@libs/token-icons";
-import { Box, Table, TableBody, TableHead } from "@mui/material";
-import { useDepositDialog } from "components/Dialog/useDepositDialog";
-import { useWithdrawDialog } from "components/Dialog/useWithdrawDialog";
+import { Table, TableBody, TableHead } from "@mui/material";
+import { useConnectWalletDialog } from "components/Header/components/useConnectWalletDialog";
+import { WalletConnection } from "near-api-js";
+import { useWallet } from "contexts/accounts";
+import CoinItem from "./CoinItem";
+import { Coin, coins } from "@libs/tokens";
 
 export default function Coins() {
-    const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
-    const [openWithdrawDialog, withdrawDialogElement] =
-        useWithdrawDialog("USDT");
+    const wallet: WalletConnection = useWallet();
+    const connected: boolean = wallet.isSignedIn();
 
-    const openDeposit = useCallback(async () => {
-        await openDepositDialog();
-    }, [openDepositDialog]);
+    const [openWalletConnectDialog, walletConnectDialogElement] =
+        useConnectWalletDialog();
 
-    const openWithdraw = useCallback(async () => {
-        await openWithdrawDialog();
-    }, [openWithdrawDialog]);
+    const openConnectNearWallet = useCallback(async () => {
+        await openWalletConnectDialog();
+    }, [openWalletConnectDialog]);
 
     return (
         <Styled.StyledSection>
-            <Table sx={{ minWidth: 650 }} style={Styled.thead_style} aria-label="simple table">
+            <Table
+                sx={{ minWidth: 650 }}
+                style={Styled.thead_style}
+                aria-label="simple table"
+            >
                 <TableHead>
                     <Styled.TR style={{ marginTop: "20px" }}>
                         <Styled.TD header={true.toString()} align="left">
                             Name
                         </Styled.TD>
-                        <Styled.TD header={true.toString()} align="right" style={{ position: "relative", right: "7px" }}>
+                        <Styled.TD
+                            header={true.toString()}
+                            align="right"
+                            style={{ position: "relative", right: "7px" }}
+                        >
                             APY
                         </Styled.TD>
-                        <Styled.TD header={true.toString()} style={{ paddingLeft: "100px" }} align="center">
+                        <Styled.TD
+                            header={true.toString()}
+                            style={{ paddingLeft: "100px" }}
+                            align="center"
+                        >
                             TVL
                         </Styled.TD>
                         <Styled.TD header={true.toString()} align="center">
@@ -39,422 +51,17 @@ export default function Coins() {
                     </Styled.TR>
                 </TableHead>
                 <TableBody>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="usdc"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>USDC</Styled.TokenName>
-                                    <Styled.TokenDes>USD coin</Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right" style={{ marginRight: "20px" }}>14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>47,243,230 USDC</span>
-                                <span>$47,243,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="usdt"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>USDT</Styled.TokenName>
-                                    <Styled.TokenDes>
-                                        USD Tether
-                                    </Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>10,243,230 USDT</span>
-                                <span>$10,243,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="dai"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>DAI</Styled.TokenName>
-                                    <Styled.TokenDes>Dai</Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>7,443,230 DAI</span>
-                                <span>$7,443,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="usn"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>USN</Styled.TokenName>
-                                    <Styled.TokenDes>USD NEAR</Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>243,230 USN</span>
-                                <span>$243,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="wbtc"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>wBTC</Styled.TokenName>
-                                    <Styled.TokenDes>
-                                        Wrapped Bitcoin
-                                    </Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>10,230.00 wBTC</span>
-                                <span>$538,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="eth"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>ETH</Styled.TokenName>
-                                    <Styled.TokenDes>Ethereum</Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>3,230.00 ETH</span>
-                                <span>$543,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
-                    <Styled.TR>
-                        <Styled.TD scope="row" align="left">
-                            <Styled.CNContainer>
-                                <TokenIcon
-                                    token="wnear"
-                                    style={{ width: "33px", height: "33px" }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        marginLeft: "18px",
-                                    }}
-                                >
-                                    <Styled.TokenName>wNEAR</Styled.TokenName>
-                                    <Styled.TokenDes>
-                                        Wrapped Near
-                                    </Styled.TokenDes>
-                                </Box>
-                            </Styled.CNContainer>
-                        </Styled.TD>
-                        <Styled.TD align="right">14,87%</Styled.TD>
-                        <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "left",
-                                }}
-                            >
-                                <span>116,829.00 wNEAR</span>
-                                <span>$1,443,230 USD Value</span>
-                            </Box>
-                        </Styled.TD>
-                        <Styled.TD align="center">
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Styled.Button
-                                    variant="contained"
-                                    disableElevation
-                                    onClick={openDeposit}
-                                >
-                                    Deposit
-                                </Styled.Button>
-                                <Styled.Button
-                                    variant="outlined"
-                                    disableElevation
-                                    onClick={openWithdraw}
-                                >
-                                    Withdraw
-                                </Styled.Button>
-                            </Box>
-                        </Styled.TD>
-                    </Styled.TR>
+                    {coins.map((item: Coin, key: number) => (
+                        <CoinItem
+                            key={key}
+                            coin={item}
+                            connected={connected}
+                            openConnectNearWallet={openConnectNearWallet}
+                        />
+                    ))}
                 </TableBody>
             </Table>
-            {depositDialogElement}
-            {withdrawDialogElement}
+            {walletConnectDialogElement}
         </Styled.StyledSection>
     );
 }
