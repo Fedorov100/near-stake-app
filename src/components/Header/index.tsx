@@ -77,7 +77,7 @@ export default function Header({ className }: DesktopHeaderProps) {
     );
 }
 
-function NavMenu({ to, title }: RouteMenu) {
+function NavMenu({ to, title, external }: RouteMenu) {
     const match = useMatch({
         path: to,
     });
@@ -91,7 +91,13 @@ function NavMenu({ to, title }: RouteMenu) {
                 paddingRight: "10px",
             }}
         >
-            <Link to={to}>{title}</Link>
+            {external ? (
+                <a href={to} target="_blank">
+                    {title}
+                </a>
+            ) : (
+                <Link to={to}>{title}</Link>
+            )}
         </div>
     );
 }

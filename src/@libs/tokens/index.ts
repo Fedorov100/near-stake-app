@@ -8,35 +8,38 @@ export const coins = [
     'wbtc',
     'eth',
     'wnear',
+    'neart',
 ] as const;
 
 export const stableCoins = [
     'usdc',
     'usdt',
+    'dai',
     'usn',
 ] as const;
 
 export const volatileCoins = [
-    'dai',
     'wbtc',
     'eth',
     'wnear',
+    'neart',
 ] as const;
 
-export const variants = ['id', 'symbol', 'name', 'img', 'description'] as const;
+export const variants = ['id', 'symbol', 'name', 'img', 'description', 'publish'] as const;
 
 export type Coin = typeof coins[number];
 export type TokenVariant = typeof variants[number];
 
 export type TokenImage = { src: string };
 
-export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
+export const tokens: Record<Coin, Record<TokenVariant, string | boolean | TokenImage>> = {
     usdc: {
         'id': "usdc",
         'symbol': "usdc",
         'name': "USDC",
         'img': tokenImages["usdc"].svg,
         'description': "USD Coin",
+        'publish': true,
     },
     usdt: {
         'id': "usdt",
@@ -44,6 +47,7 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "USDT",
         'img': tokenImages["usdt"].svg,
         'description': "USD Tether",
+        'publish': true,
     },
     dai: {
         'id': "dai",
@@ -51,6 +55,7 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "DAI",
         'img': tokenImages["dai"].svg,
         'description': "Dai",
+        'publish': true,
     },
     usn: {
         'id': "usn",
@@ -58,6 +63,7 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "USN",
         'img': tokenImages["usn"].svg,
         'description': "USD NEAR",
+        'publish': true,
     },
     wbtc: {
         'id': "wbtc",
@@ -65,6 +71,7 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "wBTC",
         'img': tokenImages["wbtc"].svg,
         'description': "Wrapped Bitcoin",
+        'publish': true,
     },
     eth: {
         'id': "eth",
@@ -72,6 +79,7 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "ETH",
         'img': tokenImages["eth"].svg,
         'description': "Ethereum",
+        'publish': true,
     },
     wnear: {
         'id': "wnear",
@@ -79,9 +87,18 @@ export const tokens: Record<Coin, Record<TokenVariant, string | TokenImage>> = {
         'name': "wNEAR",
         'img': tokenImages["wnear"].svg,
         'description': "Wrapped Near",
+        'publish': true,
+    },
+    neart: {
+        'id': "neart",
+        'symbol': "neart",
+        'name': "NEARt",
+        'img': tokenImages["neart"].svg,
+        'description': "Near Treasury",
+        'publish': false,
     },
 };
 
-export function getCoinDetail(coin: Coin): Record<TokenVariant, string | TokenImage> {
+export function getCoinDetail(coin: Coin): Record<TokenVariant, string | boolean | TokenImage> {
     return tokens[coin];
 }
