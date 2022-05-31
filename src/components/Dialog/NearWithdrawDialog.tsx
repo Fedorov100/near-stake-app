@@ -140,6 +140,7 @@ export function NearWithdrawDialog2(props: any) {
 export function NearWithdrawDialog(props: DialogProps<{}, void>) {
     const [coin, setCoin] = useState(props.coin);
     const [continued, setContinued] = React.useState(false);
+    const [withdrawAmount, setWithdrawAmount] = useState(0);
 
     return (
         <>
@@ -147,7 +148,8 @@ export function NearWithdrawDialog(props: DialogProps<{}, void>) {
                 {...props}
                 setCoin={setCoin}
                 coin={coin}
-                withdrawAmount={0}
+                withdrawAmount={withdrawAmount}
+                updateWithdrawAmount={setWithdrawAmount}
                 setContinued={setContinued}
             >
                 <div
@@ -204,7 +206,7 @@ export function NearWithdrawDialog(props: DialogProps<{}, void>) {
             </WithdrawDialog>
             {continued && (
                 <NearWarning
-                    proceed={() => {}}
+                    proceed={() => { }}
                     className={"warning-box"}
                     coin={coin}
                 />
