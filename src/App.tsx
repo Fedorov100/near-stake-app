@@ -19,6 +19,12 @@ export default function App() {
         init();
     }, [init]);
 
+    useEffect(() => {
+        // if (typeof window.near !== "undefined" && window.near.isSender) {
+        //     console.log("Sender is installed!");
+        // }
+    }, []);
+
     return (
         <WalletContext.Provider value={wallet}>
             <React.Suspense fallback={<></>}>

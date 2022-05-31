@@ -13,12 +13,12 @@ import { useConnectWalletDialog } from "components/Header/components/useConnectW
 
 export interface TotalDepositSectionProps {
     className?: string;
-    coin?: string;
+    coin: string;
     coinName?: string;
     style?: any;
 }
 
-export function TotalDepositSection({ className }: TotalDepositSectionProps) {
+export function TotalDepositSection({ className, coin }: TotalDepositSectionProps) {
     // ---------------------------------------------
     // presentation
     // ---------------------------------------------
@@ -36,7 +36,7 @@ export function TotalDepositSection({ className }: TotalDepositSectionProps) {
                                 marginLeft: "3px",
                             }}
                         >
-                            Total value of your USD/Luna deposits including
+                            Total value of your USD/Near deposits including
                             earnings calculated in USD
                         </InfoTooltip>
                     </Typography>
@@ -49,7 +49,7 @@ export function TotalDepositSection({ className }: TotalDepositSectionProps) {
                         <span style={{ fontSize: "20px" }}>USD</span>
                     </div>
                 </div>
-                <DepositButtonsTD coin={"uluna"} style={{ width: "425px" }} />
+                <DepositButtonsTD coin={coin} style={{ width: "425px" }} />
             </div>
         </Section>
     );
@@ -59,9 +59,9 @@ export function DepositButtonsTD({
     className,
     coin,
 }: TotalDepositSectionProps) {
-    const [openDepositDialog, depositDialogElement] = useDepositDialog("USDT");
+    const [openDepositDialog, depositDialogElement] = useDepositDialog(coin);
     const [openWithdrawDialog, withdrawDialogElement] =
-        useWithdrawDialog("USDT");
+        useWithdrawDialog(coin);
 
     const openDeposit = useCallback(async () => {
         await openDepositDialog();
@@ -80,6 +80,7 @@ export function DepositButtonsTD({
                 justifyContent: "end",
                 marginBottom: "5px",
             }}
+            className={className}
         >
             <div>
                 <ActionButton
