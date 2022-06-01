@@ -103,6 +103,26 @@ export const Container = styled(PaddedLayout)`
         }
     }
     .bottom-top {
+        input {
+            font-style: normal;
+            font-weight: 860;
+            font-size: 20px;
+            line-height: 120%;
+
+            padding-top: 0;
+            padding-bottom: 10px;
+        }
+        .MuiTextField-root {
+            width: 200px;
+            .MuiInputBase-root {
+                &::before {
+                    border-bottom: 1px solid #5c5353;
+                }
+                &::after {
+                    transform: scaleX(0);
+                }
+            }
+        }
         .NeuSection-content {
             height: 230px;
         }

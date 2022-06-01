@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Button, Grid, Box } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, Grid, Box, TextField } from "@mui/material";
 import { SyncAlt } from "@mui/icons-material";
 import {
     InSection,
@@ -15,13 +15,46 @@ import { ActionButton } from "@libs/components/ActionButton";
 import { FlexTitleContainer } from "components/PageTitle/style";
 import PageTitle from "components/PageTitle";
 import { InfoTooltip } from "components/InfoTooltip";
+import { numberWithCommas } from "views/Dashboard/components/ANCPriceChart";
+import NumberFormat from "react-number-format";
 
 export interface BorrowProps {
     className?: string;
 }
 
+interface CustomProps {
+    onChange: (event: { target: { name: string; value: string } }) => void;
+    name: string;
+}
+
+const NumberFormatCustom = React.forwardRef<NumberFormat<any>, CustomProps>(
+    function NumberFormatCustom(props, ref) {
+        const { onChange, ...other } = props;
+
+        return (
+            <NumberFormat
+                {...other}
+                getInputRef={ref}
+                onValueChange={(values) => {
+                    onChange({
+                        target: {
+                            name: props.name,
+                            value: values.value,
+                        },
+                    });
+                }}
+                thousandSeparator
+                isNumericString
+                prefix="$"
+            />
+        );
+    }
+);
+
 export default function Utility({ className }: BorrowProps) {
     const [active, setActive] = useState(false);
+    const [inputAmount, setInputAmount] = useState("15000");
+    const [outputAmount, setOutputAmount] = useState(0);
 
     function calcTime(offset: number) {
         let d = new Date();
@@ -37,15 +70,27 @@ export default function Utility({ className }: BorrowProps) {
         // console.log(minute);
         let day = nd.getDate();
         if (day >= 1 && day <= 7) {
-          setActive(true);
-        }
-        else {
-          setActive(false);
+            setActive(true);
+        } else {
+            setActive(false);
         }
     }
+
+    const onChangeInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (Number(e.target.value) < 0) {
+            setInputAmount(String(Number(e.target.value) * -1));
+        } else {
+            setInputAmount(e.target.value);
+        }
+    };
+
     useEffect(() => {
         calcTime(-4);
     }, []);
+
+    useEffect(() => {
+        setOutputAmount(Number(inputAmount) * 0.024);
+    }, [inputAmount]);
 
     return (
         <Container className={className}>
@@ -269,13 +314,16 @@ export default function Utility({ className }: BorrowProps) {
                                         alignItems: "flex-start",
                                     }}
                                 >
-                                    <InputAmount>$150,000 (INPUT)</InputAmount>
-                                    <div
-                                        style={{
-                                            borderBottom: "1px solid #5C5353",
-                                            width: "200px",
+                                    <TextField
+                                        id="standard-basic"
+                                        variant="standard"
+                                        value={inputAmount}
+                                        onChange={onChangeInputAmount}
+                                        InputProps={{
+                                            inputComponent:
+                                                NumberFormatCustom as any,
                                         }}
-                                    ></div>
+                                    />
                                     <SubDescription>
                                         Your Total Deposit in USD
                                     </SubDescription>
@@ -294,7 +342,7 @@ export default function Utility({ className }: BorrowProps) {
                                     }}
                                 >
                                     <InputAmount>
-                                        1,272,891 (OUTPUT)
+                                        {numberWithCommas(Number(outputAmount.toFixed(3)))}
                                     </InputAmount>
                                     <div
                                         style={{
