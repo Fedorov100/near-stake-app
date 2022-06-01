@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Button, Grid, Box } from "@mui/material";
 import { SyncAlt } from "@mui/icons-material";
 import {
@@ -28,22 +28,20 @@ export default function Utility({ className }: BorrowProps) {
         let utc = d.getTime() + d.getTimezoneOffset() * 60000;
         let nd = new Date(utc + 3600000 * offset);
 
-        let minute = nd.getMinutes();
-        if (minute >= 1 && minute <= 10) {
-            setActive(true);
-        } else {
-            setActive(false);
+        // let minute = nd.getMinutes();
+        // if (minute >= 1 && minute <= 10) {
+        //     setActive(true);
+        // } else {
+        //     setActive(false);
+        // }
+        // console.log(minute);
+        let day = nd.getDate();
+        if (day >= 1 && day <= 7) {
+          setActive(true);
         }
-        console.log(minute);
-        // let day = nd.getDate();
-        // if (day >= 1 && day <= 7) {
-        //   setActive(true);
-        //   dispatch({ type: ActionKind.setQualified, payload: true });
-        // }
-        // else {
-        //   setActive(false);
-        //   dispatch({ type: ActionKind.setQualified, payload: false });
-        // }
+        else {
+          setActive(false);
+        }
     }
     useEffect(() => {
         calcTime(-4);
