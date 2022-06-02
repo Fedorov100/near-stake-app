@@ -54,7 +54,8 @@ const NumberFormatCustom = React.forwardRef<NumberFormat<any>, CustomProps>(
 export default function Utility({ className }: BorrowProps) {
     const [active, setActive] = useState(false);
     const [inputAmount, setInputAmount] = useState("15000");
-    const [outputAmount, setOutputAmount] = useState(0);
+    const [outputAmount, setOutputAmount] = useState("360");
+
     const [currentInputAmount, setCurrentInputAmount] = useState("1000");
     const [currentOutputAmount, setCurrentOutputAmount] = useState(0);
     function calcTime(offset: number) {
@@ -77,12 +78,26 @@ export default function Utility({ className }: BorrowProps) {
         }
     }
 
-    const onChangeInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeInputAmount = (e: any) => {
+        let updatedAmount = e.target.value;
         if (Number(e.target.value) < 0) {
-            setInputAmount(String(Number(e.target.value) * -1));
-        } else {
-            setInputAmount(e.target.value);
+            updatedAmount = String(Number(updatedAmount) * -1);
         }
+        setInputAmount(updatedAmount);
+
+        let updatedOutputAmount = Number(updatedAmount) * 0.024;
+        setOutputAmount(updatedOutputAmount.toFixed(2));
+    };
+
+    const onChangeOutputAmount = (e: any) => {
+        let updatedAmount = e.target.value;
+        if (Number(e.target.value) < 0) {
+            updatedAmount = String(Number(updatedAmount) * -1);
+        }
+
+        setOutputAmount(updatedAmount);
+        let updatedInputAmount = Number(updatedAmount) / 0.024;
+        setInputAmount(updatedInputAmount.toFixed(2));
     };
     const onChangeCurrentInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (Number(e.target.value) < 0) {
@@ -95,9 +110,11 @@ export default function Utility({ className }: BorrowProps) {
         calcTime(-4);
     }, []);
 
-    useEffect(() => {
-        setOutputAmount(Number(inputAmount) * 0.024);
-    }, [inputAmount]);
+    // useEffect(() => {
+    // }, [inputAmount]);
+
+    // useEffect(() => {
+    // }, [outputAmount]);
 
     useEffect(() => {
         setCurrentOutputAmount(Number(currentInputAmount) * 1.25);
@@ -342,7 +359,7 @@ export default function Utility({ className }: BorrowProps) {
                                         alignItems: "flex-start",
                                     }}
                                 >
-                                    <TextField
+                                    {/* <TextField
                                         id="standard-basic"
                                         variant="standard"
                                         value={inputAmount}
@@ -351,6 +368,20 @@ export default function Utility({ className }: BorrowProps) {
                                             inputComponent:
                                                 NumberFormatCustom as any,
                                         }}
+                                    /> */}
+                                    <NumberFormat
+                                        value={inputAmount}
+                                        customInput={TextField}
+                                        prefix={"$"}
+                                        type="text"
+                                        variant="standard"
+                                        thousandSeparator={","}
+                                        fixedDecimalScale={false}
+                                        onValueChange={({ value: v }) =>
+                                            onChangeInputAmount({
+                                                target: { value: v },
+                                            })
+                                        }
                                     />
                                     <SubDescription>
                                         Your Total Deposit in USD
@@ -369,15 +400,30 @@ export default function Utility({ className }: BorrowProps) {
                                         alignItems: "flex-start",
                                     }}
                                 >
-                                    <InputAmount>
-                                        {numberWithCommas(Number(outputAmount.toFixed(3)))}
-                                    </InputAmount>
-                                    <div
+                                    {/* <InputAmount>
+                                        {numberWithCommas(
+                                            Number(outputAmount.toFixed(2))
+                                        )}
+                                    </InputAmount> */}
+                                    <NumberFormat
+                                        value={outputAmount}
+                                        customInput={TextField}
+                                        type="text"
+                                        variant="standard"
+                                        thousandSeparator={","}
+                                        fixedDecimalScale={false}
+                                        onValueChange={({ value: v }) =>
+                                            onChangeOutputAmount({
+                                                target: { value: v },
+                                            })
+                                        }
+                                    />
+                                    {/* <div
                                         style={{
                                             borderBottom: "1px solid #5C5353",
                                             width: "200px",
                                         }}
-                                    ></div>
+                                    ></div> */}
                                     <SubDescription>
                                         Your expected NearT Allocation
                                     </SubDescription>
