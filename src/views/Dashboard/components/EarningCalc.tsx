@@ -123,7 +123,6 @@ export const EarningCalc = (props: any) => {
                                 </MenuItem>
                             );
                         })}
-                        <MenuItem value={0.000955342}>OTHER ASSEST</MenuItem>
                     </Select>
                 </FormControl>
             </div>
