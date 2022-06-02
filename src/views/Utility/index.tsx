@@ -56,6 +56,8 @@ export default function Utility({ className }: BorrowProps) {
     const [inputAmount, setInputAmount] = useState("15000");
     const [outputAmount, setOutputAmount] = useState("360");
 
+    const [currentInputAmount, setCurrentInputAmount] = useState("1000");
+    const [currentOutputAmount, setCurrentOutputAmount] = useState(0);
     function calcTime(offset: number) {
         let d = new Date();
         let utc = d.getTime() + d.getTimezoneOffset() * 60000;
@@ -97,7 +99,13 @@ export default function Utility({ className }: BorrowProps) {
         let updatedInputAmount = Number(updatedAmount) / 0.024;
         setInputAmount(updatedInputAmount.toFixed(2));
     };
-
+    const onChangeCurrentInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (Number(e.target.value) < 0) {
+            setCurrentInputAmount(String(Number(e.target.value) * -1));
+        } else {
+            setCurrentInputAmount(e.target.value);
+        }
+    };
     useEffect(() => {
         calcTime(-4);
     }, []);
@@ -108,6 +116,9 @@ export default function Utility({ className }: BorrowProps) {
     // useEffect(() => {
     // }, [outputAmount]);
 
+    useEffect(() => {
+        setCurrentOutputAmount(Number(currentInputAmount) * 1.25);
+    }, [currentInputAmount]);
     return (
         <Container className={className}>
             <FlexTitleContainer>
@@ -256,7 +267,16 @@ export default function Utility({ className }: BorrowProps) {
                             </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
-                            <div className={"numbers"}>$10,355</div>
+                            <TextField
+                                id="currentInput"
+                                variant="standard"
+                                value={currentInputAmount}
+                                onChange={onChangeCurrentInputAmount}
+                                InputProps={{
+                                    inputComponent:
+                                        NumberFormatCustom as any,
+                                }}
+                            />
                             <span className={"denom"}>USD</span>
                         </div>
                     </section>
@@ -281,7 +301,16 @@ export default function Utility({ className }: BorrowProps) {
                             </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
-                            <div className={"numbers"}>$122,875</div>
+                            <TextField
+                                id="currentOutput"
+                                variant="standard"
+                                value={currentOutputAmount}
+                                InputProps={{
+                                    inputComponent:
+                                        NumberFormatCustom as any,
+                                    readOnly: true
+                                }}
+                            />
                             <span className={"denom"}>USD</span>
                         </div>
                     </section>
