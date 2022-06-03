@@ -119,7 +119,7 @@ function TotalValueBase({ className }: TotalValueProps) {
                     </div>
                     <div style={{ fontSize: "9px" }}>
                         <a
-                            href="https://www.coinspot.com.au/swap/near"
+                            href="https://app.ref.finance/"
                             style={{ textDecoration: "inherit" }}
                         >
                             <BorderButton
