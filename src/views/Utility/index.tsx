@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Grid, Box, TextField } from "@mui/material";
 import { SyncAlt } from "@mui/icons-material";
-import {
-    InSection,
-    Container,
-    InputAmount,
-    SubDescription,
-    ProjectedValue,
-} from "./style";
+import { InSection, Container, SubDescription, ProjectedValue } from "./style";
 import { StyledSection } from "views/Dashboard/style";
 import { Section } from "views/MyPage/style";
 import { StakeButton } from "views/Earn/components/TotalDepositSection";
@@ -15,49 +9,49 @@ import { ActionButton } from "@libs/components/ActionButton";
 import { FlexTitleContainer } from "components/PageTitle/style";
 import PageTitle from "components/PageTitle";
 import { InfoTooltip } from "components/InfoTooltip";
-import { numberWithCommas } from "views/Dashboard/components/ANCPriceChart";
 import NumberFormat from "react-number-format";
+import { toFixed } from "@libs/formatter/wallet-address";
 
 export interface BorrowProps {
     className?: string;
 }
 
-interface CustomProps {
-    onChange: (event: { target: { name: string; value: string } }) => void;
-    name: string;
-}
+// interface CustomProps {
+//     onChange: (event: { target: { name: string; value: string } }) => void;
+//     name: string;
+// }
 
-const NumberFormatCustom = React.forwardRef<NumberFormat<any>, CustomProps>(
-    function NumberFormatCustom(props, ref) {
-        const { onChange, ...other } = props;
+// const NumberFormatCustom = React.forwardRef<NumberFormat<any>, CustomProps>(
+//     function NumberFormatCustom(props, ref) {
+//         const { onChange, ...other } = props;
 
-        return (
-            <NumberFormat
-                {...other}
-                getInputRef={ref}
-                onValueChange={(values) => {
-                    onChange({
-                        target: {
-                            name: props.name,
-                            value: values.value,
-                        },
-                    });
-                }}
-                thousandSeparator
-                isNumericString
-                prefix="$"
-            />
-        );
-    }
-);
+//         return (
+//             <NumberFormat
+//                 {...other}
+//                 getInputRef={ref}
+//                 onValueChange={(values) => {
+//                     onChange({
+//                         target: {
+//                             name: props.name,
+//                             value: values.value,
+//                         },
+//                     });
+//                 }}
+//                 thousandSeparator
+//                 isNumericString
+//                 prefix="$"
+//             />
+//         );
+//     }
+// );
 
 export default function Utility({ className }: BorrowProps) {
     const [active, setActive] = useState(false);
     const [inputAmount, setInputAmount] = useState("15000");
     const [outputAmount, setOutputAmount] = useState("360");
 
-    const [currentInputAmount, setCurrentInputAmount] = useState("1000");
-    const [currentOutputAmount, setCurrentOutputAmount] = useState(0);
+    // const [currentInputAmount, setCurrentInputAmount] = useState("1000");
+    // const [currentOutputAmount, setCurrentOutputAmount] = useState(0);
     function calcTime(offset: number) {
         let d = new Date();
         let utc = d.getTime() + d.getTimezoneOffset() * 60000;
@@ -79,33 +73,35 @@ export default function Utility({ className }: BorrowProps) {
     }
 
     const onChangeInputAmount = (e: any) => {
-        let updatedAmount = e.target.value;
+        let updatedAmount = e.target.value.replace(/[^.0-9]/g, '');
         if (Number(e.target.value) < 0) {
             updatedAmount = String(Number(updatedAmount) * -1);
         }
         setInputAmount(updatedAmount);
-
+        
         let updatedOutputAmount = Number(updatedAmount) * 0.024;
-        setOutputAmount(updatedOutputAmount.toFixed(2));
+        setOutputAmount(toFixed(updatedOutputAmount));
     };
 
     const onChangeOutputAmount = (e: any) => {
-        let updatedAmount = e.target.value;
+        let updatedAmount = e.target.value.replace(/[^.0-9]/g, '');
         if (Number(e.target.value) < 0) {
             updatedAmount = String(Number(updatedAmount) * -1);
         }
 
         setOutputAmount(updatedAmount);
         let updatedInputAmount = Number(updatedAmount) / 0.024;
-        setInputAmount(updatedInputAmount.toFixed(2));
+        setInputAmount(toFixed(updatedInputAmount));
     };
-    const onChangeCurrentInputAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (Number(e.target.value) < 0) {
-            setCurrentInputAmount(String(Number(e.target.value) * -1));
-        } else {
-            setCurrentInputAmount(e.target.value);
-        }
-    };
+    // const onChangeCurrentInputAmount = (
+    //     e: React.ChangeEvent<HTMLInputElement>
+    // ) => {
+    //     if (Number(e.target.value) < 0) {
+    //         setCurrentInputAmount(String(Number(e.target.value) * -1));
+    //     } else {
+    //         setCurrentInputAmount(e.target.value);
+    //     }
+    // };
     useEffect(() => {
         calcTime(-4);
     }, []);
@@ -116,9 +112,9 @@ export default function Utility({ className }: BorrowProps) {
     // useEffect(() => {
     // }, [outputAmount]);
 
-    useEffect(() => {
-        setCurrentOutputAmount(Number(currentInputAmount) * 1.25);
-    }, [currentInputAmount]);
+    // useEffect(() => {
+    //     setCurrentOutputAmount(Number(currentInputAmount) * 1.25);
+    // }, [currentInputAmount]);
     return (
         <Container className={className}>
             <FlexTitleContainer>
@@ -267,16 +263,13 @@ export default function Utility({ className }: BorrowProps) {
                             </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
-                            <TextField
+                            {/* <CustomInput
                                 id="currentInput"
-                                variant="standard"
+                                inputComponent={NumberFormatCustom as any}
                                 value={currentInputAmount}
                                 onChange={onChangeCurrentInputAmount}
-                                InputProps={{
-                                    inputComponent:
-                                        NumberFormatCustom as any,
-                                }}
-                            />
+                            /> */}
+                            <div className="numbers">$10,355</div>
                             <span className={"denom"}>USD</span>
                         </div>
                     </section>
@@ -301,16 +294,14 @@ export default function Utility({ className }: BorrowProps) {
                             </InfoTooltip>
                         </div>
                         <div className={"adorn"}>
-                            <TextField
+                            {/* <CustomInput
                                 id="currentOutput"
-                                variant="standard"
+                                className="projected-value"
+                                inputComponent={NumberFormatCustom as any}
                                 value={currentOutputAmount}
-                                InputProps={{
-                                    inputComponent:
-                                        NumberFormatCustom as any,
-                                    readOnly: true
-                                }}
-                            />
+                                readOnly
+                            /> */}
+                            <div className="numbers">$122,875</div>
                             <span className={"denom"}>USD</span>
                         </div>
                     </section>
@@ -377,11 +368,7 @@ export default function Utility({ className }: BorrowProps) {
                                         variant="standard"
                                         thousandSeparator={","}
                                         fixedDecimalScale={false}
-                                        onValueChange={({ value: v }) =>
-                                            onChangeInputAmount({
-                                                target: { value: v },
-                                            })
-                                        }
+                                        onChange={onChangeInputAmount}
                                     />
                                     <SubDescription>
                                         Your Total Deposit in USD
@@ -412,11 +399,7 @@ export default function Utility({ className }: BorrowProps) {
                                         variant="standard"
                                         thousandSeparator={","}
                                         fixedDecimalScale={false}
-                                        onValueChange={({ value: v }) =>
-                                            onChangeOutputAmount({
-                                                target: { value: v },
-                                            })
-                                        }
+                                        onChange={onChangeOutputAmount}
                                     />
                                     {/* <div
                                         style={{

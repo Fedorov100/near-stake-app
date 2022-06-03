@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { InputBase, Typography } from "@mui/material";
 import { PaddedLayout } from "components/layouts/PaddedLayout";
 import { screen } from "env";
 import styled from "styled-components";
@@ -77,6 +77,11 @@ export const Container = styled(PaddedLayout)`
         .denom {
             margin-left: 5px;
             font-weight: 860;
+        }
+        .projected-value {
+            input {
+                color: #cebfbf;
+            }
         }
     }
 
@@ -384,5 +389,17 @@ export const Container = styled(PaddedLayout)`
                 }
             }
         }
+    }
+`;
+
+export const CustomInput = styled(InputBase)`
+    min-width: 50px;
+    width: ${(props) => `${String(props.value).length * 35}px`};
+
+    input {
+        font-style: normal;
+        font-weight: 860;
+        font-size: 35px;
+        line-height: 36px;
     }
 `;

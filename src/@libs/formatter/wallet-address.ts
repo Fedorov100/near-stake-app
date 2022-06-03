@@ -14,3 +14,7 @@ export function truncateEvm(text: string = ''): string {
 export function truncateBalance(balance: number = 0): string {
     return balance.toString().match(/^-?\d+(?:\.\d{0,3})?/)![0];
 }
+
+export function toFixed(num: number = 0): string {
+    return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)![0];
+}
