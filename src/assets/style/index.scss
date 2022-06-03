@@ -21,3 +21,12 @@ code {
 .total_class {
   margin-top: 53px;
 }
+
+#currentInput {
+  font-size: 31px;
+}
+
+#currentOutput {
+  font-size: 31px;
+  read-only: true;
+}
