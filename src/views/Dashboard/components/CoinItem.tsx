@@ -61,7 +61,7 @@ export default function CoinItem(props: CoinItemProps) {
                     </Styled.CNContainer>
                 </Styled.TD>
                 <Styled.TD align="right" style={{ marginRight: "20px" }}>
-                    14,87%
+                    {tokenDetail.apy}%
                 </Styled.TD>
                 <Styled.TD align="left" style={{ paddingLeft: "160px" }}>
                     <Box

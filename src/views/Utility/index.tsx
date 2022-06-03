@@ -412,7 +412,7 @@ export default function Utility({ className }: BorrowProps) {
                                     </SubDescription>
                                     <ProjectedValue>
                                         The Projected Allocation Value:
-                                        $323,121.75USD{" "}
+                                        ${(Number(outputAmount) * 1.25).toFixed(2)}USD{" "}
                                     </ProjectedValue>
                                 </Box>
                             </Grid>
