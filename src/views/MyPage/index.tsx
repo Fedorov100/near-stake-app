@@ -1,5 +1,10 @@
 import { Tab } from "@libs/components/Tab";
-import { Coin, coins as allCoins, stableCoins, volatileCoins } from "@libs/tokens";
+import {
+    Coin,
+    coins as allCoins,
+    stableCoins,
+    volatileCoins,
+} from "@libs/tokens";
 import { Grid, useMediaQuery } from "@mui/material";
 import PageTitle from "components/PageTitle";
 import { TitleContainer } from "components/PageTitle/style";
@@ -82,12 +87,7 @@ export default function MyPage({ className }: MypageProps) {
                         md={6}
                         style={{ paddingTop: "12px", paddingBottom: "12px" }}
                     >
-                        <DepositCard
-                            token={item}
-                            saveBalance=""
-                            saveUSDBalance="$937,345.00"
-                            apy="14,87%"
-                        />
+                        <DepositCard token={item} />
                     </Grid>
                 ))}
             </Grid>

@@ -9,20 +9,13 @@ import DepositButtons from "./DepoistButtons";
 import styled from "styled-components";
 import { Coin, getCoinDetail } from "@libs/tokens";
 import { BorderButton } from "@libs/components/BorderButton";
+import { numberWithCommas } from "views/Dashboard/components/ANCPriceChart";
 
 export interface TokenCardProps {
     token: Coin;
-    saveBalance: string;
-    saveUSDBalance: string;
-    apy: string;
 }
 
-export default function DepositCard({
-    token,
-    saveBalance,
-    saveUSDBalance,
-    apy,
-}: TokenCardProps) {
+export default function DepositCard({ token }: TokenCardProps) {
     const tokenDetail = getCoinDetail(token);
     return (
         <>
@@ -103,8 +96,23 @@ export default function DepositCard({
                                                 Saving Balance
                                             </InfoTooltip>
                                         </Box>
-                                        <BAmount>{saveBalance}</BAmount>
-                                        <BAmount>{saveUSDBalance}</BAmount>
+                                        <BAmount>{`${
+                                            tokenDetail.is_stable ? "$" : ""
+                                        }${numberWithCommas(
+                                            Number(tokenDetail.deposit_amount)
+                                        )} ${
+                                            !tokenDetail.is_stable
+                                                ? tokenDetail.name
+                                                : ""
+                                        }`}</BAmount>
+                                        <BAmount>
+                                            {!tokenDetail.is_stable &&
+                                                `$${numberWithCommas(
+                                                    Number(
+                                                        tokenDetail.usd_value
+                                                    )
+                                                )} USD Value`}
+                                        </BAmount>
                                     </Box>
                                     <Box
                                         sx={{
@@ -126,7 +134,7 @@ export default function DepositCard({
                                                 APY
                                             </InfoTooltip>
                                         </Box>
-                                        <BAmount>{apy}</BAmount>
+                                        <BAmount>{tokenDetail.apy}%</BAmount>
                                     </Box>
                                 </Box>
                             </Grid>

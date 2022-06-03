@@ -18,7 +18,10 @@ export default function Earn({ className }: EarnProps) {
                 <PageTitle title="EARN" />
             </FlexTitleContainer>
             <section>
-                <TotalDepositSection coin="usdt" className="total-deposit NeuSection-root" />
+                <TotalDepositSection
+                    coin="usdt"
+                    className="total-deposit NeuSection-root"
+                />
                 <Grid
                     container
                     rowSpacing={4}
@@ -27,12 +30,7 @@ export default function Earn({ className }: EarnProps) {
                 >
                     {coins.map((item: Coin, key: number) => (
                         <Grid item md={6} key={key}>
-                            <DepositCard
-                                token={item}
-                                saveBalance=""
-                                saveUSDBalance="$937,345.00"
-                                apy="14,87%"
-                            />
+                            <DepositCard token={item} />
                         </Grid>
                     ))}
                 </Grid>
